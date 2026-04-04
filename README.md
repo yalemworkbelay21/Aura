@@ -1,9 +1,9 @@
 <div align="center">
   
-  ![GitHub repo size](https://img.shields.io/github/repo-size/Mequannent28/Auraa)
-  ![GitHub stars](https://img.shields.io/github/stars/Mequannent28/Auraa?style=social)
-  ![GitHub forks](https://img.shields.io/github/forks/Mequannent28/Auraa?style=social)
-[![Twitter Follow](https://img.shields.io/twitter/follow/Mequannent28?style=social)](https://twitter.com/intent/follow?screen_name=Mequannent28)
+  ![GitHub repo size](https://img.shields.io/github/repo-size/friehiwottsegay-arch/Auraa)
+  ![GitHub stars](https://img.shields.io/github/stars/friehiwottsegay-arch/Auraa?style=social)
+  ![GitHub forks](https://img.shields.io/github/forks/friehiwottsegay-arch/Auraa?style=social)
+[![Twitter Follow](https://img.shields.io/twitter/follow/friehiwottsegay-arch?style=social)](https://twitter.com/intent/follow?screen_name=friehiwottsegay-arch)
   [![YouTube Video Views](https://img.shields.io/youtube/views/CjVGp5kGHxA?style=social)](https://youtu.be/CjVGp5kGHxA)
 
   <br />
@@ -13,7 +13,7 @@
 
   Aura is a fully responsive restaurant website, <br />Responsive for all devices, build using HTML, CSS, and JavaScript.
 
-  <a href="https://Mequannent28.github.io/Auraa/"><strong>➥ Live Demo</strong></a>
+  <a href="https://friehiwottsegay-arch.github.io/Auraa/"><strong>➥ Live Demo</strong></a>
 
 </div>
 
