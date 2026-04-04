@@ -13,7 +13,7 @@ EROS BY LEWI, Rakan Building, Cape Verde St, Addis Ababa, Ethiopia
 Daily : 8.00 am to 2.00 am
 
 <ion-icon name="call-outline" aria-hidden="true"></ion-icon>
-+1 123 456 7890
++251 977 24 9999 / +251 977 34 9999
 
 <ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
 booking@erosaddis.com
@@ -113,7 +113,7 @@ Lorem Ipsum is simply dummy text of the printingand typesetting industry lorem I
 
 Book Through Call
 
-+80 (400) 123 4567
++251 977 24 9999 / +251 977 34 9999
 
 Read More
 
@@ -211,7 +211,7 @@ Sam Jhonson
 Online Reservation
 
 Booking request
-+88-123-123456
++251 977 24 9999 / +251 977 34 9999
 or fill out the order form
 
 placeholder = Your Name
@@ -243,7 +243,7 @@ Contact Us
 
 Booking Request
 
-+88-123-123456
++251 977 24 9999 / +251 977 34 9999
 
             EROS BY LEWI, Rakan Building,
             Cape Verde St, Addis Ababa, Ethiopia
@@ -309,7 +309,7 @@ EROS BY LEWI, Rakan Building, Cape Verde St, Addis Ababa, Ethiopia
 
 booking@erosaddis.com
 
-Booking Request : +88-123-123456
+Booking Request : +251 977 24 9999 / +251 977 34 9999
 
 Open : 08:00 am - 02:00 am
 
@@ -438,5 +438,5 @@ Monday to Sunday
 Contact Us
 Restaurant St, Delicious City, London 9578, UK
 
-+88-123-123456
++251 977 24 9999 / +251 977 34 9999
 reservation@restro.com
