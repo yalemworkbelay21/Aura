@@ -199,10 +199,14 @@ View All Menu
 #---------- TESTIMONIALS ----------#
 
 ”
-I wanted to thank you for inviting me down for that amazing dinner the other night. The food was extraordinary.
+1. Abebe Kebede
+"I wanted to thank you for inviting me down for that amazing dinner the other night. The food was extraordinary."
 
-alt = Sam Jhonson
-Sam Jhonson
+2. Tsion Hailu
+"The atmosphere is just magical. The perfect place for a romantic dinner or a friendly gathering."
+
+3. Mulugeta Tadesse
+"Best whiskey selection in Addis Ababa! The service was professional and the cocktails were exquisite."
 
 
 
