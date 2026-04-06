@@ -16,12 +16,34 @@ async function initDynamicContent() {
         'foot_hours': 'Open: ' + s.site_hours,
         'dyn_hero_subtitle': s.hero_subtitle,
         'dyn_hero_title': s.hero_title ? s.hero_title.replace(/\n/g, '<br>') : null,
+        'dyn_hero2_subtitle': s.hero2_subtitle,
+        'dyn_hero2_title': s.hero2_title ? s.hero2_title.replace(/\n/g, '<br>') : null,
+        'dyn_hero3_subtitle': s.hero3_subtitle,
+        'dyn_hero3_title': s.hero3_title ? s.hero3_title.replace(/\n/g, '<br>') : null,
+        'dyn_about_label': s.about_label,
+        'dyn_about_title': s.about_title,
         'dyn_about_text': s.about_text
       };
       
       Object.keys(map).forEach(id => {
          const el = document.getElementById(id);
          if(el && map[id]) el.innerHTML = map[id];
+      });
+
+      const socials = {
+        'dyn_social_fb': s.social_fb,
+        'dyn_social_ig': s.social_ig,
+        'dyn_social_tw': s.social_tw,
+        'dyn_social_yt': s.social_yt,
+        'dyn_social_wa': s.social_wa ? `https://wa.me/${s.social_wa.replace(/[^0-9]/g,'')}` : null
+      };
+
+      Object.keys(socials).forEach(id => {
+         const el = document.getElementById(id);
+         if(el && socials[id]) {
+           el.href = socials[id];
+           if (id === 'dyn_social_wa') el.target = "_blank";
+         }
       });
 
       // Email Links

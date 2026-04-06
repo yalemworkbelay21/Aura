@@ -555,19 +555,56 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
           </div>
           
           <h3 style="color: var(--gold); margin-top: 30px; margin-bottom: 15px; font-family: 'Forum', serif;">Homepage Hero Content</h3>
-          <div style="margin-bottom: 20px;">
-            <label style="display: block; color: var(--text-muted); margin-bottom: 8px;">Hero Subtitle (e.g. Traditional & Hygine)</label>
-            <input type="text" id="set_hero_subtitle" class="input-reply" style="width: 100%;">
-          </div>
-          <div style="margin-bottom: 20px;">
-            <label style="display: block; color: var(--text-muted); margin-bottom: 8px;">Hero Title (Main headline)</label>
-            <input type="text" id="set_hero_title" class="input-reply" style="width: 100%;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div style="margin-bottom: 20px;">
+              <label style="display: block; color: var(--text-muted); margin-bottom: 8px;">Slide 1: Subtitle</label>
+              <input type="text" id="set_hero_subtitle" class="input-reply" style="width: 100%;">
+            </div>
+            <div style="margin-bottom: 20px;">
+              <label style="display: block; color: var(--text-muted); margin-bottom: 8px;">Slide 1: Title</label>
+              <input type="text" id="set_hero_title" class="input-reply" style="width: 100%;">
+            </div>
+            <div style="margin-bottom: 20px;">
+              <label style="display: block; color: var(--text-muted); margin-bottom: 8px;">Slide 2: Subtitle</label>
+              <input type="text" id="set_hero2_subtitle" class="input-reply" style="width: 100%;">
+            </div>
+            <div style="margin-bottom: 20px;">
+              <label style="display: block; color: var(--text-muted); margin-bottom: 8px;">Slide 2: Title</label>
+              <input type="text" id="set_hero2_title" class="input-reply" style="width: 100%;">
+            </div>
+            <div style="margin-bottom: 20px;">
+              <label style="display: block; color: var(--text-muted); margin-bottom: 8px;">Slide 3: Subtitle</label>
+              <input type="text" id="set_hero3_subtitle" class="input-reply" style="width: 100%;">
+            </div>
+            <div style="margin-bottom: 20px;">
+              <label style="display: block; color: var(--text-muted); margin-bottom: 8px;">Slide 3: Title</label>
+              <input type="text" id="set_hero3_title" class="input-reply" style="width: 100%;">
+            </div>
           </div>
 
           <h3 style="color: var(--gold); margin-top: 30px; margin-bottom: 15px; font-family: 'Forum', serif;">About Aura Section</h3>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+            <div>
+              <label style="display: block; color: var(--text-muted); margin-bottom: 8px;">Section Label (e.g. Our Story)</label>
+              <input type="text" id="set_about_label" class="input-reply" style="width: 100%;">
+            </div>
+            <div>
+              <label style="display: block; color: var(--text-muted); margin-bottom: 8px;">Main Title</label>
+              <input type="text" id="set_about_title" class="input-reply" style="width: 100%;">
+            </div>
+          </div>
           <div style="margin-bottom: 30px;">
-            <label style="display: block; color: var(--text-muted); margin-bottom: 8px;">Our Story (Description paragraph)</label>
+            <label style="display: block; color: var(--text-muted); margin-bottom: 8px;">Description Paragraph</label>
             <textarea id="set_about_text" class="input-reply" style="width: 100%; height: 100px; resize: vertical;"></textarea>
+          </div>
+
+          <h3 style="color: var(--gold); margin-top: 30px; margin-bottom: 15px; font-family: 'Forum', serif;">Social Media Links</h3>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
+            <div><label style="display: block; color: var(--text-muted); margin-bottom: 8px;">Facebook URL</label><input type="text" id="set_social_fb" class="input-reply" style="width: 100%;"></div>
+            <div><label style="display: block; color: var(--text-muted); margin-bottom: 8px;">Instagram URL</label><input type="text" id="set_social_ig" class="input-reply" style="width: 100%;"></div>
+            <div><label style="display: block; color: var(--text-muted); margin-bottom: 8px;">Twitter (X) URL</label><input type="text" id="set_social_tw" class="input-reply" style="width: 100%;"></div>
+            <div><label style="display: block; color: var(--text-muted); margin-bottom: 8px;">YouTube URL</label><input type="text" id="set_social_yt" class="input-reply" style="width: 100%;"></div>
+            <div style="grid-column: span 2;"><label style="display: block; color: var(--text-muted); margin-bottom: 8px;">WhatsApp Number (e.g. +251 977 24 9999)</label><input type="text" id="set_social_wa" class="input-reply" style="width: 100%;"></div>
           </div>
           
           <button type="submit" class="btn-action" style="width: 200px; padding: 12px;">Push Live Changes</button>
@@ -800,7 +837,18 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
         site_address: document.getElementById('set_site_address').value,
         hero_subtitle: document.getElementById('set_hero_subtitle').value,
         hero_title: document.getElementById('set_hero_title').value,
-        about_text: document.getElementById('set_about_text').value
+        hero2_subtitle: document.getElementById('set_hero2_subtitle').value,
+        hero2_title: document.getElementById('set_hero2_title').value,
+        hero3_subtitle: document.getElementById('set_hero3_subtitle').value,
+        hero3_title: document.getElementById('set_hero3_title').value,
+        about_label: document.getElementById('set_about_label').value,
+        about_title: document.getElementById('set_about_title').value,
+        about_text: document.getElementById('set_about_text').value,
+        social_fb: document.getElementById('set_social_fb').value,
+        social_ig: document.getElementById('set_social_ig').value,
+        social_tw: document.getElementById('set_social_tw').value,
+        social_yt: document.getElementById('set_social_yt').value,
+        social_wa: document.getElementById('set_social_wa').value
       };
 
       const response = await fetch('api.php?action=update_settings', {
