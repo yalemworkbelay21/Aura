@@ -26,10 +26,11 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
   <style>
     :root {
       --bg-dark: #0a0b0c;
-      --card-bg: #161718;
+      --card-bg: rgba(22, 23, 24, 0.6);
       --gold: #E4C590;
       --text: #ffffff;
       --text-muted: #a9a9a9;
+      --glass-border: rgba(255, 255, 255, 0.08);
     }
 
     body {
@@ -39,56 +40,69 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
       font-family: 'DM Sans', sans-serif;
       margin: 0;
       display: flex;
+      min-height: 100vh;
     }
     
     body::before {
       content: '';
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.70);
+      background: radial-gradient(circle at center, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.85) 100%);
       z-index: -1;
     }
 
     .sidebar {
-      width: 280px;
+      width: 260px;
       height: 100vh;
-      background-color: rgba(22, 23, 24, 0.6);
-      backdrop-filter: blur(15px);
-      border-right: 1px solid #333;
-      padding: 30px 20px;
+      background-color: rgba(10, 11, 12, 0.8);
+      backdrop-filter: blur(20px);
+      border-right: 1px solid var(--glass-border);
+      padding: 30px 15px;
       position: fixed;
+      display: flex;
+      flex-direction: column;
     }
 
     .sidebar-logo {
       font-family: 'Forum', serif;
-      font-size: 32px;
+      font-size: 28px;
       color: var(--gold);
-      margin-bottom: 50px;
+      margin-bottom: 40px;
       text-align: center;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
     }
 
     .nav-list {
       list-style: none;
       padding: 0;
+      flex-grow: 1;
     }
 
     .nav-item {
-      padding: 15px 20px;
-      margin-bottom: 10px;
-      border-radius: 8px;
+      padding: 12px 18px;
+      margin-bottom: 8px;
+      border-radius: 12px;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       align-items: center;
       gap: 15px;
       color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 500;
     }
 
-    .nav-item:hover,
+    .nav-item:hover {
+      background-color: rgba(228, 197, 144, 0.1);
+      color: var(--gold);
+      transform: translateX(5px);
+    }
+
     .nav-item.active {
-      background-color: var(--gold);
+      background: linear-gradient(135deg, var(--gold) 0%, #D4B47C 100%);
       color: var(--bg-dark);
+      box-shadow: 0 10px 20px rgba(228, 197, 144, 0.2);
     }
 
     .nav-item ion-icon {
@@ -96,45 +110,79 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
     }
 
     .main-content {
-      margin-left: 280px;
+      margin-left: 260px;
       flex-grow: 1;
-      padding: 40px;
-      min-height: 100vh;
+      padding: 30px 50px;
+      max-width: 1400px;
+    }
+
+    .header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding: 15px 0;
     }
 
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
       margin-bottom: 40px;
     }
 
     .stat-card {
-      background-color: rgba(22, 23, 24, 0.65);
-      backdrop-filter: blur(12px);
-      padding: 25px;
-      border-radius: 12px;
-      border: 1px solid #333;
+      background: var(--card-bg);
+      backdrop-filter: blur(15px);
+      padding: 20px;
+      border-radius: 16px;
+      border: 1px solid var(--glass-border);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 4px;
+      background: var(--gold);
+      opacity: 0;
+      transition: 0.4s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(228, 197, 144, 0.4);
+      background: rgba(22, 23, 24, 0.8);
+    }
+
+    .stat-card:hover::before {
+      opacity: 1;
     }
 
     .stat-label {
       color: var(--text-muted);
-      font-size: 14px;
-      margin-bottom: 10px;
+      font-size: 13px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .stat-value {
-      font-size: 28px;
+      font-size: 24px;
       color: var(--gold);
-      font-weight: bold;
+      font-weight: 700;
+      font-family: 'Forum', serif;
     }
 
     .data-table-container {
-      background-color: rgba(22, 23, 24, 0.65);
-      backdrop-filter: blur(12px);
-      border-radius: 12px;
-      border: 1px solid #333;
+      background: var(--card-bg);
+      backdrop-filter: blur(15px);
+      border-radius: 16px;
+      border: 1px solid var(--glass-border);
       overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     }
 
     table {
@@ -144,147 +192,68 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
 
     th {
       text-align: left;
-      padding: 15px 25px;
+      padding: 18px 25px;
       color: var(--gold);
-      font-size: 14px;
+      font-size: 13px;
       text-transform: uppercase;
-      border-bottom: 1px solid #333;
+      letter-spacing: 1.5px;
+      background: rgba(228, 197, 144, 0.05);
+      border-bottom: 1px solid var(--glass-border);
     }
 
     td {
-      padding: 15px 25px;
-      border-bottom: 1px solid #222;
-      font-size: 15px;
+      padding: 16px 25px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      font-size: 14px;
     }
 
-    tr:last-child td {
-      border-bottom: none;
+    tr:hover td {
+      background: rgba(228, 197, 144, 0.02);
     }
 
     .status-badge {
-      padding: 5px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: bold;
-    }
-
-    .status-pending {
-      background-color: #ffd70020;
-      color: #ffd700;
-    }
-
-    .status-confirmed {
-      background-color: #00ff0020;
-      color: #00ff00;
-    }
-
-    .btn-action {
-      background-color: transparent;
-      color: var(--gold);
-      border: 1px solid var(--gold);
-      padding: 8px 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 600;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 11px;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
 
-    .btn-action:hover {
-      background-color: var(--gold);
-      color: var(--bg-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(228, 197, 144, 0.3);
-    }
+    .status-pending { background: rgba(255, 215, 0, 0.1); color: #ffd700; border: 1px solid rgba(255, 215, 0, 0.2); }
+    .status-confirmed { background: rgba(0, 255, 0, 0.1); color: #00ff00; border: 1px solid rgba(0, 255, 0, 0.2); }
 
-    .btn-view {
-      border-color: #3498db;
-      color: #3498db;
-    }
-
-    .btn-view:hover {
-      background-color: #3498db;
-      color: white;
-      border-color: #3498db;
-      box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
-    }
-
-    .btn-delete {
-      border-color: #e74c3c;
-      color: #e74c3c;
-    }
-
-    .btn-delete:hover {
-      background-color: #e74c3c;
-      color: white;
-      border-color: #e74c3c;
-      box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
-    }
-
-    .button-group {
+    .action-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
       display: flex;
-      gap: 10px;
       align-items: center;
-    }
-
-    /* Modal Styling */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      z-index: 2000;
       justify-content: center;
-      align-items: center;
-    }
-
-    .modal-content {
-      background: var(--card-bg);
-      border: 1px solid var(--gold);
-      padding: 30px;
-      border-radius: 12px;
-      width: 400px;
-      position: relative;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      font-size: 24px;
-      cursor: pointer;
-      color: var(--gold);
-    }
-
-    .modal-title {
-      font-family: 'Forum', serif;
-      color: var(--gold);
-      margin-bottom: 20px;
-    }
-
-    .modal-item {
-      margin-bottom: 10px;
-      font-size: 15px;
-    }
-
-    .modal-label {
+      border: 1px solid var(--glass-border);
+      background: rgba(255, 255, 255, 0.05);
       color: var(--text-muted);
-      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
     }
 
+    .action-btn:hover {
+      background: var(--gold);
+      color: var(--bg-dark);
+      border-color: var(--gold);
+      transform: scale(1.1);
+    }
+
+    .btn-delete:hover { background: #e74c3c; border-color: #e74c3c; color: white; }
+    .btn-view:hover { background: #3498db; border-color: #3498db; color: white; }
+    .btn-confirm:hover { background: #2ecc71; border-color: #2ecc71; color: white; }
 
     .chat-reply-box {
-      margin-top: 10px;
-      display: flex;
-      gap: 10px;
+      margin-top: 15px;
+      background: rgba(10, 11, 12, 0.4);
+      padding: 15px;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
     }
 
     .input-reply {
@@ -509,15 +478,15 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
           <td>${r.person}</td>
           <td><span class="status-badge ${r.status === 'confirmed' ? 'status-confirmed' : 'status-pending'}">${r.status || 'Pending'}</span></td>
           <td>
-            <div class="button-group">
-              <button class="btn-action btn-view" onclick="viewRes(${JSON.stringify(r).replace(/"/g, '&quot;')})">
-                <ion-icon name="eye-outline"></ion-icon> View
+            <div style="display: flex; gap: 8px;">
+              <button class="action-btn btn-view" onclick="viewRes(${JSON.stringify(r).replace(/"/g, '&quot;')})" title="View Details">
+                <ion-icon name="eye-outline"></ion-icon>
               </button>
-              <button class="btn-action" onclick="handleRes(${r.id}, 'confirmed')">
-                <ion-icon name="checkmark-outline"></ion-icon> Confirm
+              <button class="action-btn btn-confirm" onclick="handleRes(${r.id}, 'confirmed')" title="Confirm Reservation">
+                <ion-icon name="checkmark-outline"></ion-icon>
               </button>
-              <button class="btn-action btn-delete" onclick="deleteRes(${r.id})">
-                <ion-icon name="trash-outline"></ion-icon> Delete
+              <button class="action-btn btn-delete" onclick="deleteRes(${r.id})" title="Delete">
+                <ion-icon name="trash-outline"></ion-icon>
               </button>
             </div>
           </td>
@@ -562,12 +531,12 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
           <td>${s.email}</td>
           <td>${s.created_at}</td>
           <td>
-            <div class="button-group">
-              <button class="btn-action" onclick="sendMail('${s.email}')">
-                <ion-icon name="mail-outline"></ion-icon> Send Offer
+            <div style="display: flex; gap: 8px;">
+              <button class="action-btn btn-view" onclick="sendMail('${s.email}')" title="Send Offer">
+                <ion-icon name="mail-outline"></ion-icon>
               </button>
-              <button class="btn-action btn-delete" onclick="deleteSub(${s.id})">
-                <ion-icon name="trash-outline"></ion-icon> Remove
+              <button class="action-btn btn-delete" onclick="deleteSub(${s.id})" title="Remove Subscriber">
+                <ion-icon name="trash-outline"></ion-icon>
               </button>
             </div>
           </td>
