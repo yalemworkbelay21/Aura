@@ -2,6 +2,7 @@ services:
   - type: web
     name: aura-restaurant
     runtime: docker
+    plan: free
     envVars:
       - key: DB_HOST
         sync: false
