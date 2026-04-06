@@ -88,6 +88,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute([$input['id']]);
         echo json_encode(['success' => true]);
     }
+    if ($action === 'update_settings') {
+        foreach ($input as $key => $value) {
+            $stmt = $pdo->prepare("INSERT INTO settings (setting_key, setting_value) VALUES (?, ?) ON DUPLICATE KEY UPDATE setting_value = ?");
+            $stmt->execute([$key, $value, $value]);
+        }
+        echo json_encode(['success' => true]);
+    }
 }
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if ($action === 'get_all') {
@@ -96,13 +103,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $subStmt = $pdo->query("SELECT * FROM subscribers ORDER BY created_at DESC");
         $menuStmt = $pdo->query("SELECT * FROM menu_items ORDER BY category ASC, title ASC");
         $galStmt = $pdo->query("SELECT * FROM gallery ORDER BY created_at DESC");
+        $setStmt = $pdo->query("SELECT * FROM settings");
+
+        $settings = [];
+        foreach ($setStmt->fetchAll() as $row) {
+            $settings[$row['setting_key']] = $row['setting_value'];
+        }
 
         echo json_encode([
             'reservations' => $resStmt->fetchAll(),
             'chats' => $chatStmt->fetchAll(),
             'subscribers' => $subStmt->fetchAll(),
             'menu' => $menuStmt->fetchAll(),
-            'gallery' => $galStmt->fetchAll()
+            'gallery' => $galStmt->fetchAll(),
+            'settings' => $settings
         ]);
     }
 }

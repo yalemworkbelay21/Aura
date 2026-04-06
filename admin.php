@@ -300,6 +300,9 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
       <li class="nav-item" onclick="showSection('gallery-manager')">
         <ion-icon name="images-outline"></ion-icon> Gallery Manager
       </li>
+      <li class="nav-item" onclick="showSection('website-settings')">
+        <ion-icon name="settings-outline"></ion-icon> Website Settings
+      </li>
       <li class="nav-item" onclick="showSection('profile')">
         <ion-icon name="person-circle-outline"></ion-icon> My Profile
       </li>
@@ -429,6 +432,57 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
       </div>
     </div>
 
+    <!-- Section: Website Settings -->
+    <div id="website-settings" class="data-table-container" style="display: none;">
+      <div style="padding: 20px 25px; border-bottom: 1px solid #333;">
+        <h2 style="font-family: 'Forum', serif; color: var(--gold); margin: 0;">Global Website Settings</h2>
+      </div>
+      <div style="padding: 40px; max-width: 800px;">
+        <form onsubmit="saveSettings(event)">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div style="margin-bottom: 20px;">
+              <label style="display: block; color: var(--text-muted); margin-bottom: 8px;">Site Name</label>
+              <input type="text" id="set_site_name" class="input-reply" style="width: 100%;">
+            </div>
+            <div style="margin-bottom: 20px;">
+              <label style="display: block; color: var(--text-muted); margin-bottom: 8px;">Contact Phone</label>
+              <input type="text" id="set_site_phone" class="input-reply" style="width: 100%;">
+            </div>
+            <div style="margin-bottom: 20px;">
+              <label style="display: block; color: var(--text-muted); margin-bottom: 8px;">Contact Email</label>
+              <input type="email" id="set_site_email" class="input-reply" style="width: 100%;">
+            </div>
+            <div style="margin-bottom: 20px;">
+              <label style="display: block; color: var(--text-muted); margin-bottom: 8px;">Opening Hours</label>
+              <input type="text" id="set_site_hours" class="input-reply" style="width: 100%;">
+            </div>
+          </div>
+          <div style="margin-bottom: 20px;">
+            <label style="display: block; color: var(--text-muted); margin-bottom: 8px;">Full Address</label>
+            <input type="text" id="set_site_address" class="input-reply" style="width: 100%;">
+          </div>
+          
+          <h3 style="color: var(--gold); margin-top: 30px; margin-bottom: 15px; font-family: 'Forum', serif;">Homepage Hero Content</h3>
+          <div style="margin-bottom: 20px;">
+            <label style="display: block; color: var(--text-muted); margin-bottom: 8px;">Hero Subtitle (e.g. Traditional & Hygine)</label>
+            <input type="text" id="set_hero_subtitle" class="input-reply" style="width: 100%;">
+          </div>
+          <div style="margin-bottom: 20px;">
+            <label style="display: block; color: var(--text-muted); margin-bottom: 8px;">Hero Title (Main headline)</label>
+            <input type="text" id="set_hero_title" class="input-reply" style="width: 100%;">
+          </div>
+
+          <h3 style="color: var(--gold); margin-top: 30px; margin-bottom: 15px; font-family: 'Forum', serif;">About Aura Section</h3>
+          <div style="margin-bottom: 30px;">
+            <label style="display: block; color: var(--text-muted); margin-bottom: 8px;">Our Story (Description paragraph)</label>
+            <textarea id="set_about_text" class="input-reply" style="width: 100%; height: 100px; resize: vertical;"></textarea>
+          </div>
+          
+          <button type="submit" class="btn-action" style="width: 200px; padding: 12px;">Push Live Changes</button>
+        </form>
+      </div>
+    </div>
+
     <!-- Section: Profile -->
     <div id="profile" class="data-table-container" style="display: none;">
       <div style="padding: 20px 25px; border-bottom: 1px solid #333;">
@@ -487,6 +541,7 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
       document.getElementById('subscribers').style.display = 'none';
       document.getElementById('menu-manager').style.display = 'none';
       document.getElementById('gallery-manager').style.display = 'none';
+      document.getElementById('website-settings').style.display = 'none';
       document.getElementById('profile').style.display = 'none';
       document.getElementById(id).style.display = 'block';
       document.getElementById('pageTitle').innerText = id.charAt(0).toUpperCase() + id.slice(1);
@@ -611,6 +666,36 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
         `;
         galleryGrid.appendChild(div);
       });
+
+      // Update Settings Inputs
+      if (data.settings) {
+        Object.keys(data.settings).forEach(key => {
+          const el = document.getElementById('set_' + key);
+          if (el) el.value = data.settings[key];
+        });
+      }
+    }
+
+    window.saveSettings = async function (e) {
+      e.preventDefault();
+      const settings = {
+        site_name: document.getElementById('set_site_name').value,
+        site_phone: document.getElementById('set_site_phone').value,
+        site_email: document.getElementById('set_site_email').value,
+        site_hours: document.getElementById('set_site_hours').value,
+        site_address: document.getElementById('set_site_address').value,
+        hero_subtitle: document.getElementById('set_hero_subtitle').value,
+        hero_title: document.getElementById('set_hero_title').value,
+        about_text: document.getElementById('set_about_text').value
+      };
+
+      const response = await fetch('api.php?action=update_settings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(settings)
+      });
+      if ((await response.json()).success) alert("Website settings updated successfully!");
+      loadData();
     }
 
     window.openAddMenu = function() {

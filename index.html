@@ -63,7 +63,7 @@
           <ion-icon name="location-outline" aria-hidden="true"></ion-icon>
         </div>
 
-        <span class="span">
+        <span class="span" id="dyn_address">
           Aura, Rakan Building, Cape Verde St, Addis Ababa, Ethiopia
         </span>
       </address>
@@ -75,25 +75,25 @@
           <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
         </div>
 
-        <span class="span">Daily : 8.00 am to 2.00 am</span>
+        <span class="span" id="dyn_hours">Daily : 8.00 am to 2.00 am</span>
       </div>
 
-      <a href="tel:+251977249999" class="topbar-item link">
+      <a href="#" id="dyn_phone_link" class="topbar-item link">
         <div class="icon">
           <ion-icon name="call-outline" aria-hidden="true"></ion-icon>
         </div>
 
-        <span class="span">+251 977 24 9999 / +251 977 34 9999</span>
+        <span class="span" id="dyn_phone">+251 977 24 9999 / +251 977 34 9999</span>
       </a>
 
       <div class="separator"></div>
 
-      <a href="mailto:restaurantmth@gmail.com" class="topbar-item link">
+      <a href="#" id="dyn_email_link" class="topbar-item link">
         <div class="icon">
           <ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
         </div>
 
-        <span class="span">restaurantmth@gmail.com</span>
+        <span class="span" id="dyn_email">restaurantmth@gmail.com</span>
       </a>
 
     </div>
@@ -226,9 +226,9 @@
               <img src="./assets/images/hero-slider-1.jpg" width="1880" height="950" alt="" class="img-cover">
             </div>
 
-            <p class="label-2 section-subtitle slider-reveal">Tradational & Hygine</p>
+            <p class="label-2 section-subtitle slider-reveal" id="dyn_hero_subtitle">Tradational & Hygine</p>
 
-            <h1 class="display-1 hero-title slider-reveal">
+            <h1 class="display-1 hero-title slider-reveal" id="dyn_hero_title">
               For the love of <br>
               delicious food
             </h1>
@@ -430,8 +430,8 @@
           <div class="about-content">
 
             <p class="section-subtitle label-2 reveal reveal-left" id="about-label">Our Story</p>
-          <h2 class="headline-1 section-title reveal reveal-left">Every Flavor Tells a Story</h2>
-          <p class="section-text reveal reveal-up">
+            <h2 class="headline-1 section-title reveal reveal-left">Every Flavor Tells a Story</h2>
+            <p class="section-text reveal reveal-up" id="dyn_about_text">
               Our culinary journey is driven by a passion for excellence. We source only the freshest ingredients to
               create dishes
               that are as visually stunning as they are delicious. From traditional favorites to modern fusions,
@@ -533,8 +533,7 @@
 
           <h2 class="headline-1 section-title text-center">Delicious Menu</h2>
 
-          <ul class="grid-list">
-
+          <ul class="grid-list" id="dyn_menu_list">
             <li>
               <div class="menu-card hover:card">
 
@@ -999,8 +998,7 @@
 
           <h2 class="section-title headline-1 text-center">Upcoming Event</h2>
 
-          <ul class="grid-list">
-
+          <ul class="grid-list" id="dyn_gallery_list">
             <li>
               <div class="event-card has-before hover:shine">
 
@@ -1094,16 +1092,15 @@
             <img src="./assets/images/logo.svg" width="240" height="60" loading="lazy" alt="Aura Restaurant home">
           </a>
 
-          <address class="body-4">
+          <address class="body-4" id="foot_address">
             Aura, Rakan Building, Cape Verde St, Addis Ababa, Ethiopia
           </address>
 
-          <a href="mailto:restaurantmth@gmail.com" class="body-4 contact-link">restaurantmth@gmail.com</a>
+          <a href="#" id="foot_email_link" class="body-4 contact-link">restaurantmth@gmail.com</a>
 
-          <a href="tel:+251977249999" class="body-4 contact-link">Booking Request : +251 977 24 9999 / +251 977 34
-            9999</a>
+          <a href="#" id="foot_phone_link" class="body-4 contact-link">Booking Request : <span id="foot_phone">+251 977 24 9999 / +251 977 34 9999</span></a>
 
-          <p class="body-4">
+          <p class="body-4" id="foot_hours">
             Open : 08:00 am - 02:00 am
           </p>
 
@@ -1153,7 +1150,7 @@
           <li>
             <a href="#" class="label-2 footer-link hover-underline">Contact</a>
           </li>
-          
+
           <li>
             <a href="login.php" class="label-2 footer-link hover-underline">Admin Login</a>
           </li>
@@ -1167,7 +1164,8 @@
           </li>
 
           <li>
-            <a href="https://instagram.com/auraa.ddis" class="label-2 footer-link hover-underline" target="_blank">Instagram</a>
+            <a href="https://instagram.com/auraa.ddis" class="label-2 footer-link hover-underline"
+              target="_blank">Instagram</a>
           </li>
 
           <li>
@@ -1179,7 +1177,8 @@
           </li>
 
           <li>
-            <a href="https://wa.me/251974249494" class="label-2 footer-link hover-underline" target="_blank">WhatsApp</a>
+            <a href="https://wa.me/251974249494" class="label-2 footer-link hover-underline"
+              target="_blank">WhatsApp</a>
           </li>
 
           <li>
@@ -1193,14 +1192,14 @@
       <div class="footer-bottom">
 
         <p class="copyright">
-          &copy; 2026 Aura. All Rights Reserved | 
+          &copy; 2026 Aura. All Rights Reserved |
           <a href="login.php" class="link">Admin</a> |
           Crafted by
           <span style="display: inline-flex; align-items: center; gap: 8px;">
             <img src="./assets/images/Mequ.jpg" width="30" height="30"
-              style="border-radius: 50%; border: 1px solid var(--gold-color, #E4C590);" alt="Mequannent Gashaw">
+              style="border-radius: 50%; border: 1px solid var(--gold-color, #E4C590);" alt="MequanneGashaw">
             Mequannent Gashaw Asinake
-          </span> | <a href="https://wa.me/251974249494" class="link" target="_blank">WhatsApp</a>
+          </span> | <a href="https://wa.me/25197424949412334ey5eriyt" class="link" target="_blank">WhatsApp</a>
         </p>
 
       </div>
@@ -1398,23 +1397,23 @@
     async function loadChats() {
       const response = await fetch('api.php?action=get_all');
       const data = await response.json();
-      
+
       const chatbox = document.getElementById('chatbox');
       // Keep scroll position if we are at the bottom
       const isScrolledToBottom = chatbox.scrollHeight - chatbox.clientHeight <= chatbox.scrollTop + 1;
-      
+
       chatbox.innerHTML = ''; // Clear and rebuild
-      
+
       data.chats.forEach(c => {
-         const div = document.createElement('div');
-         if (c.is_admin === 1 || c.is_admin === '1') {
-            div.className = 'chat-msg bot';
-            div.textContent = c.msg;
-         } else {
-            div.className = 'chat-msg user';
-            div.textContent = c.msg;
-         }
-         chatbox.appendChild(div);
+        const div = document.createElement('div');
+        if (c.is_admin === 1 || c.is_admin === '1') {
+          div.className = 'chat-msg bot';
+          div.textContent = c.msg;
+        } else {
+          div.className = 'chat-msg user';
+          div.textContent = c.msg;
+        }
+        chatbox.appendChild(div);
       });
 
       if (isScrolledToBottom) {
@@ -1442,7 +1441,7 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ msg: msg, is_admin: 0, time: new Date().toLocaleString() })
       });
-      
+
       loadChats();
     }
     // Reservation Handling
@@ -1476,7 +1475,7 @@
     document.getElementById('subForm').addEventListener('submit', async function (e) {
       e.preventDefault();
       const email = this.querySelector('input[name="email_address"]').value;
-      if(!email) return;
+      if (!email) return;
 
       const response = await fetch('api.php?action=save_subscriber', {
         method: 'POST',
@@ -1511,4 +1510,4 @@
   </script>
 </body>
 
-</html>
+</html><script src="./assets/js/sync.js"></script>

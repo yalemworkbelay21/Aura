@@ -84,6 +84,25 @@ try {
         (2, './assets/images/service-2.jpg', 'Modern Restaurant Atmosphere'),
         (3, './assets/images/service-3.jpg', 'Premium Bar & Drinks Selection')");
 
+    $pdo->exec("CREATE TABLE IF NOT EXISTS settings (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        setting_key VARCHAR(100) NOT NULL UNIQUE,
+        setting_value TEXT,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    )");
+
+    // Seed default settings
+    $pdo->exec("INSERT IGNORE INTO settings (setting_key, setting_value) VALUES 
+        ('site_name', 'Aura Restaurant'),
+        ('site_phone', '+251 977 24 9999 / +251 977 34 9999'),
+        ('site_email', 'restaurantmth@gmail.com'),
+        ('site_address', 'Aura, Rakan Building, Cape Verde St, Addis Ababa, Ethiopia'),
+        ('site_hours', 'Daily : 8.00 am to 2.00 am'),
+        ('hero_subtitle', 'Tradational & Hygine'),
+        ('hero_title', 'For the love of delicious food'),
+        ('about_text', 'Our culinary journey is driven by a passion for excellence...')
+    ");
+
     // Self-heal: add otp columns if table already exists without them
     try { $pdo->exec("ALTER TABLE admins ADD COLUMN otp_code VARCHAR(6) DEFAULT NULL"); } catch(PDOException $e) {}
     try { $pdo->exec("ALTER TABLE admins ADD COLUMN otp_expiry DATETIME DEFAULT NULL"); } catch(PDOException $e) {}
