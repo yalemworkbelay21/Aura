@@ -52,51 +52,56 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
     }
 
     .sidebar {
-      width: 260px;
-      height: 100vh;
-      background-color: rgba(10, 11, 12, 0.8);
-      backdrop-filter: blur(20px);
-      border-right: 1px solid var(--glass-border);
-      padding: 30px 15px;
+      width: 100%;
+      height: 80px;
+      background-color: rgba(10, 11, 12, 0.85);
+      backdrop-filter: blur(25px);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 0 40px;
       position: fixed;
+      top: 0; left: 0;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 1000;
     }
 
     .sidebar-logo {
       font-family: 'Forum', serif;
-      font-size: 28px;
+      font-size: 24px;
       color: var(--gold);
-      margin-bottom: 40px;
-      text-align: center;
-      letter-spacing: 3px;
+      margin: 0;
+      letter-spacing: 2px;
       text-transform: uppercase;
     }
 
     .nav-list {
       list-style: none;
       padding: 0;
-      flex-grow: 1;
+      margin: 0;
+      display: flex;
+      gap: 15px;
     }
 
     .nav-item {
-      padding: 12px 18px;
-      margin-bottom: 8px;
+      padding: 10px 18px;
+      margin: 0;
       border-radius: 12px;
       cursor: pointer;
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 10px;
       color: var(--text-muted);
-      font-size: 14px;
-      font-weight: 500;
+      font-size: 13px;
+      font-weight: 600;
     }
 
     .nav-item:hover {
       background-color: rgba(228, 197, 144, 0.1);
       color: var(--gold);
-      transform: translateX(5px);
+      transform: translateY(-2px);
     }
 
     .nav-item.active {
@@ -106,14 +111,14 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
     }
 
     .nav-item ion-icon {
-      font-size: 20px;
+      font-size: 18px;
     }
 
     .main-content {
-      margin-left: 260px;
-      flex-grow: 1;
-      padding: 30px 50px;
-      max-width: 1400px;
+      margin: 120px auto 50px;
+      padding: 0 20px;
+      max-width: 1200px;
+      width: 95%;
     }
 
     .header-bar {
@@ -283,42 +288,47 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
   </div>
 
   <aside class="sidebar">
-    <div class="sidebar-logo">AURA PHP</div>
+    <div class="sidebar-logo">AURA DASHBOARD</div>
     <ul class="nav-list">
       <li class="nav-item active" onclick="showSection('reservations')">
         <ion-icon name="calendar-outline"></ion-icon> Reservations
       </li>
       <li class="nav-item" onclick="showSection('chats')">
-        <ion-icon name="chatbubbles-outline"></ion-icon> Chat Messages
+        <ion-icon name="chatbubbles-outline"></ion-icon> Chats
       </li>
       <li class="nav-item" onclick="showSection('subscribers')">
         <ion-icon name="people-outline"></ion-icon> Subscribers
       </li>
       <li class="nav-item" onclick="showSection('profile')">
-        <ion-icon name="person-circle-outline"></ion-icon> My Profile
-      </li>
-      <li class="nav-item" style="margin-top: auto;">
-        <a href="logout.php"
-          style="color: #e74c3c; text-decoration: none; display: flex; align-items: center; gap: 15px;">
-          <ion-icon name="log-out-outline"></ion-icon> Logout
-        </a>
+        <ion-icon name="person-circle-outline"></ion-icon> Profile
       </li>
       <li class="nav-item">
-        <a href="index.html"
-          style="color: inherit; text-decoration: none; display: flex; align-items: center; gap: 15px;">
-          <ion-icon name="home-outline"></ion-icon> View Site
+        <a href="index.html" style="color: inherit; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+          <ion-icon name="home-outline"></ion-icon> Site
+        </a>
+      </li>
+      <li class="nav-item" style="margin-left: 10px;">
+        <a href="logout.php" style="color: #e74c3c; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+          <ion-icon name="log-out-outline"></ion-icon> Exit
         </a>
       </li>
     </ul>
+
+    <div style="display: flex; align-items: center; gap: 15px; border-left: 1px solid var(--glass-border); padding-left: 20px; margin-left: 20px;">
+      <div style="text-align: right;">
+        <p id="mgrName" style="margin: 0; font-size: 13px; font-weight: 700; color: var(--gold);"><?php echo $username; ?></p>
+        <p style="margin: 0; font-size: 11px; color: var(--text-muted);">Manager</p>
+      </div>
+      <img id="topProfilePic" src="<?php echo $profilePic; ?>" width="42" height="42"
+        style="border-radius: 50%; border: 2px solid var(--gold); object-fit: cover;">
+    </div>
   </aside>
 
   <main class="main-content">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
-      <h1 style="font-family: 'Forum', serif; font-size: 36px; margin: 0;" id="pageTitle">Reservations</h1>
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <span id="mgrName"><?php echo $username; ?></span>
-        <img id="topProfilePic" src="<?php echo $profilePic; ?>" width="40" height="40"
-          style="border-radius: 50%; border: 2px solid var(--gold);">
+    <div class="header-bar">
+      <h1 style="font-family: 'Forum', serif; font-size: 42px; margin: 0; letter-spacing: 1px;" id="pageTitle">Reservations</h1>
+      <div style="display: flex; gap: 10px; align-items: center;">
+        <span class="status-badge" style="background: rgba(0, 255, 0, 0.1); color: #00ff00; border: 1px solid rgba(0, 255, 0, 0.2);"> System Live </span>
       </div>
     </div>
 
