@@ -40,7 +40,8 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
       font-family: 'DM Sans', sans-serif;
       margin: 0;
       display: flex;
-      min-height: 100vh;
+      height: 100vh;
+      overflow: hidden;
     }
     
     body::before {
@@ -113,7 +114,10 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
       margin-left: 260px;
       flex-grow: 1;
       padding: 30px 50px;
-      max-width: 1400px;
+      height: 100vh;
+      overflow-y: auto;
+      max-width: calc(100% - 260px);
+      scroll-behavior: smooth;
     }
 
     .header-bar {
