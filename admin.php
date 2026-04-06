@@ -252,6 +252,25 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
     .btn-view:hover { background: #3498db; border-color: #3498db; color: white; }
     .btn-confirm:hover { background: #2ecc71; border-color: #2ecc71; color: white; }
 
+    .btn-action {
+      background: linear-gradient(135deg, var(--gold) 0%, #D4B47C 100%);
+      color: var(--bg-dark);
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: none;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 15px rgba(228, 197, 144, 0.2);
+    }
+
+    .btn-action:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(228, 197, 144, 0.3);
+      filter: brightness(1.1);
+    }
+
     .chat-reply-box {
       margin-top: 15px;
       background: rgba(10, 11, 12, 0.4);
@@ -424,7 +443,7 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
     <div id="menu-manager" class="data-table-container" style="display: none;">
       <div style="padding: 20px 25px; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center;">
         <h2 style="font-family: 'Forum', serif; color: var(--gold); margin: 0;">Menu Manager</h2>
-        <button class="action-btn" onclick="openAddMenu()" style="width: 140px; border-radius: 8px; font-size: 13px;">+ Add Dish</button>
+        <button class="btn-action" onclick="openAddMenu()">+ Add Dish</button>
       </div>
       <table>
         <thead>
@@ -443,7 +462,7 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
     <div id="gallery-manager" class="data-table-container" style="display: none;">
       <div style="padding: 20px 25px; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center;">
         <h2 style="font-family: 'Forum', serif; color: var(--gold); margin: 0;">Gallery Manager</h2>
-        <button class="action-btn" onclick="openAddGallery()" style="width: 150px; border-radius: 8px; font-size: 13px;">+ Add Image</button>
+        <button class="btn-action" onclick="openAddGallery()">+ Add Image</button>
       </div>
       <div id="galleryGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; padding: 25px;">
         <!-- Data populated by JS -->
@@ -662,9 +681,17 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
         const tr = document.createElement('tr');
         const mJson = JSON.stringify(m).replace(/'/g, "&#39;");
         tr.innerHTML = `
-          <td><div style="display:flex; align-items:center; gap:10px;"><img src="${m.image}" width="40" height="40" style="border-radius:8px"> ${m.title}</div></td>
-          <td>${m.category}</td>
-          <td>$${m.price}</td>
+          <td>
+            <div style="display:flex; align-items:center; gap:12px;">
+              <img src="${m.image}" width="45" height="45" style="border-radius:10px; border:1px solid rgba(255,255,255,0.1)">
+              <div>
+                <div style="font-weight:700; color:var(--text);">${m.title}</div>
+                <div style="font-size:12px; color:var(--text-muted); max-width:220px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${m.description || 'No description provided'}</div>
+              </div>
+            </div>
+          </td>
+          <td><span style="font-size:13px; color:var(--gold); opacity:0.8">${m.category}</span></td>
+          <td><span style="font-weight:700; color:var(--gold)">$${m.price}</span></td>
           <td>
             <div style="display:flex; gap:5px;">
                <button class="action-btn btn-view" onclick='viewMenu(${mJson})' title="View Details"><ion-icon name="eye-outline"></ion-icon></button>
@@ -683,14 +710,17 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
         const gJson = JSON.stringify(g).replace(/'/g, "&#39;");
         div.style.position = 'relative';
         div.innerHTML = `
-          <img src="${g.image}" style="width:100%; height:150px; object-fit:cover; border-radius:12px; border: 1px solid var(--glass-border)">
-          <div style="position:absolute; top:10px; right:10px; display:flex; gap:5px;">
-            <button class="action-btn btn-confirm" onclick='editGallery(${gJson})' style="width:30px; height:30px" title="Edit Caption">
-              <ion-icon name="create-outline"></ion-icon>
-            </button>
-            <button class="action-btn btn-delete" onclick="deleteGallery(${g.id})" style="width:30px; height:30px" title="Delete Image">
-              <ion-icon name="trash-outline"></ion-icon>
-            </button>
+          <div style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 16px; border: 1px solid var(--glass-border); transition: 0.3s;" onmouseover="this.style.background='rgba(228,197,144,0.05)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
+            <div style="position: relative;">
+              <img src="${g.image}" style="width:100%; height:150px; object-fit:cover; border-radius:10px; margin-bottom: 8px;">
+              <div style="position:absolute; top:8px; right:8px; display:flex; gap:5px;">
+                <button class="action-btn btn-confirm" onclick='editGallery(${gJson})' style="width:28px; height:28px; font-size:14px" title="Edit Content"><ion-icon name="create-outline"></ion-icon></button>
+                <button class="action-btn btn-delete" onclick="deleteGallery(${g.id})" style="width:28px; height:28px; font-size:14px" title="Delete Image"><ion-icon name="trash-outline"></ion-icon></button>
+              </div>
+            </div>
+            <p style="color: var(--gold); font-size: 13px; text-align: center; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${g.caption || ''}">
+              ${g.caption || '<span style="opacity:0.5; font-style:italic">No description</span>'}
+            </p>
           </div>
         `;
         galleryGrid.appendChild(div);
