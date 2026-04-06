@@ -63,7 +63,8 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
       display: flex;
       flex-direction: row;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-start;
+      gap: 50px;
       z-index: 1000;
     }
 
@@ -314,7 +315,7 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
       </li>
     </ul>
 
-    <div style="display: flex; align-items: center; gap: 15px; border-left: 1px solid var(--glass-border); padding-left: 20px; margin-left: 20px;">
+    <div style="display: flex; align-items: center; gap: 15px; border-left: 1px solid var(--glass-border); padding-left: 20px; margin-left: auto;">
       <div style="text-align: right;">
         <p id="mgrName" style="margin: 0; font-size: 13px; font-weight: 700; color: var(--gold);"><?php echo $username; ?></p>
         <p style="margin: 0; font-size: 11px; color: var(--text-muted);">Manager</p>
