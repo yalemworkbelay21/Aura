@@ -270,6 +270,20 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
       outline: none;
     }
 
+    .main-content::-webkit-scrollbar {
+      width: 6px;
+    }
+    .main-content::-webkit-scrollbar-thumb {
+      background: rgba(228, 197, 144, 0.3);
+      border-radius: 10px;
+    }
+    .main-content::-webkit-scrollbar-thumb:hover {
+      background: var(--gold);
+    }
+    .main-content::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.2);
+    }
+
     .active-section {
       display: block;
     }
