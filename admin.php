@@ -306,6 +306,61 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
     .active-section {
       display: block;
     }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background: var(--card-bg);
+      padding: 40px;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 500px;
+      position: relative;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    }
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      color: var(--text-muted);
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .modal-close:hover {
+      color: var(--gold);
+    }
+    .modal-title {
+      font-family: 'Forum', serif;
+      color: var(--gold);
+      margin-top: 0;
+      margin-bottom: 25px;
+      font-size: 24px;
+    }
+    .modal-item {
+      margin-bottom: 12px;
+      font-size: 15px;
+      color: #eee;
+    }
+    .modal-label {
+      font-weight: bold;
+      color: var(--gold);
+      margin-right: 8px;
+    }
   </style>
 </head>
 
