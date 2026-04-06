@@ -1,8 +1,8 @@
 <?php
-$host = 'localhost';
-$user = 'root';
-$pass = ''; // Default XAMPP password
-$db   = 'aura_db';
+$host = getenv('DB_HOST') ?: 'localhost';
+$user = getenv('DB_USER') ?: 'root';
+$pass = getenv('DB_PASS') ?: ''; 
+$db   = getenv('DB_NAME') ?: 'aura_db';
 
 try {
     // Initial connection to create DB if missing
