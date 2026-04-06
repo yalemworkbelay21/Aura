@@ -2,18 +2,18 @@
 <html lang="en">
 
 <head>
+  <meta http-equiv="refresh" content="0; url=admin.php">
+  <script>window.location.href = "admin.php";</script>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Dashboard - Aura Restaurant</title>
-
   <!-- Google Font Link -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Forum&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="./assets/css/style.css">
-
   <style>
     :root {
       --bg-dark: #0a0b0c;
@@ -49,7 +49,11 @@
       letter-spacing: 2px;
     }
 
-    .nav-list { list-style: none; padding: 0; }
+    .nav-list {
+      list-style: none;
+      padding: 0;
+    }
+
     .nav-item {
       padding: 15px 20px;
       margin-bottom: 10px;
@@ -61,11 +65,16 @@
       gap: 15px;
       color: var(--text-muted);
     }
-    .nav-item:hover, .nav-item.active {
+
+    .nav-item:hover,
+    .nav-item.active {
       background-color: var(--gold);
       color: var(--bg-dark);
     }
-    .nav-item ion-icon { font-size: 20px; }
+
+    .nav-item ion-icon {
+      font-size: 20px;
+    }
 
     .main-content {
       margin-left: 280px;
@@ -80,7 +89,12 @@
       align-items: center;
       margin-bottom: 40px;
     }
-    .header-title { font-family: 'Forum', serif; font-size: 36px; margin: 0; }
+
+    .header-title {
+      font-family: 'Forum', serif;
+      font-size: 36px;
+      margin: 0;
+    }
 
     .stats-grid {
       display: grid;
@@ -88,14 +102,25 @@
       gap: 30px;
       margin-bottom: 40px;
     }
+
     .stat-card {
       background-color: var(--card-bg);
       padding: 25px;
       border-radius: 12px;
       border: 1px solid #333;
     }
-    .stat-label { color: var(--text-muted); font-size: 14px; margin-bottom: 10px; }
-    .stat-value { font-size: 28px; color: var(--gold); font-weight: bold; }
+
+    .stat-label {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      color: var(--gold);
+      font-weight: bold;
+    }
 
     .data-table-container {
       background-color: var(--card-bg);
@@ -103,6 +128,7 @@
       border: 1px solid #333;
       overflow: hidden;
     }
+
     .table-header {
       padding: 20px 25px;
       border-bottom: 1px solid #333;
@@ -110,10 +136,30 @@
       justify-content: space-between;
       align-items: center;
     }
-    table { width: 100%; border-collapse: collapse; }
-    th { text-align: left; padding: 15px 25px; color: var(--gold); font-size: 14px; text-transform: uppercase; border-bottom: 1px solid #333; }
-    td { padding: 15px 25px; border-bottom: 1px solid #222; font-size: 15px; }
-    tr:last-child td { border-bottom: none; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      text-align: left;
+      padding: 15px 25px;
+      color: var(--gold);
+      font-size: 14px;
+      text-transform: uppercase;
+      border-bottom: 1px solid #333;
+    }
+
+    td {
+      padding: 15px 25px;
+      border-bottom: 1px solid #222;
+      font-size: 15px;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
 
     .status-badge {
       padding: 5px 12px;
@@ -121,8 +167,16 @@
       font-size: 12px;
       font-weight: bold;
     }
-    .status-pending { background-color: #ffd70020; color: #ffd700; }
-    .status-confirmed { background-color: #00ff0020; color: #00ff00; }
+
+    .status-pending {
+      background-color: #ffd70020;
+      color: #ffd700;
+    }
+
+    .status-confirmed {
+      background-color: #00ff0020;
+      color: #00ff00;
+    }
 
     .btn-action {
       background-color: transparent;
@@ -134,15 +188,23 @@
       margin-right: 5px;
       transition: all 0.3s ease;
     }
-    .btn-action:hover { background-color: var(--gold); color: var(--bg-dark); }
+
+    .btn-action:hover {
+      background-color: var(--gold);
+      color: var(--bg-dark);
+    }
 
     /* Chat Section */
-    .chat-manager { display: none; }
+    .chat-manager {
+      display: none;
+    }
+
     .chat-reply-box {
       margin-top: 10px;
       display: flex;
       gap: 10px;
     }
+
     .input-reply {
       flex-grow: 1;
       background: #222;
@@ -153,7 +215,9 @@
       outline: none;
     }
 
-    .active-section { display: block; }
+    .active-section {
+      display: block;
+    }
   </style>
 </head>
 
@@ -168,8 +232,18 @@
       <li class="nav-item" onclick="showSection('chats')">
         <ion-icon name="chatbubbles-outline"></ion-icon> Chat Messages
       </li>
+      <li class="nav-item" onclick="showSection('subscribers')">
+        <ion-icon name="people-outline"></ion-icon> Subscribers
+      </li>
       <li class="nav-item">
-        <a href="index.html" style="color: inherit; text-decoration: none; display: flex; align-items: center; gap: 15px;">
+        <a href="logout.php"
+          style="color: #e74c3c; text-decoration: none; display: flex; align-items: center; gap: 15px;">
+          <ion-icon name="log-out-outline"></ion-icon> Logout
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="index.html"
+          style="color: inherit; text-decoration: none; display: flex; align-items: center; gap: 15px;">
           <ion-icon name="home-outline"></ion-icon> View Site
         </a>
       </li>
@@ -181,7 +255,9 @@
       <h1 class="header-title" id="pageTitle">Reservations</h1>
       <div class="user-profile" style="display: flex; align-items: center; gap: 10px;">
         <span>Welcome, Admin</span>
-        <img src="./assets/images/Mequ.jpg" width="40" height="40" style="border-radius: 50%; border: 2px solid var(--gold);">
+        <a href="admin.php" style="color: var(--gold); text-decoration: none; font-size: 14px;">(Go to Profile)</a>
+        <img src="./assets/images/Mequ.jpg" width="40" height="40"
+          style="border-radius: 50%; border: 2px solid var(--gold);">
       </div>
     </div>
 
@@ -244,7 +320,7 @@
       document.getElementById('chats').style.display = 'none';
       document.getElementById(id).style.display = 'block';
       document.getElementById('pageTitle').innerText = id.charAt(0).toUpperCase() + id.slice(1);
-      
+
       const navItems = document.querySelectorAll('.nav-item');
       navItems.forEach(item => item.classList.remove('active'));
       const activeItem = Array.from(navItems).find(item => item.innerText.trim().toLowerCase().includes(id.toLowerCase()));
@@ -295,21 +371,21 @@
       });
     }
 
-    window.handleRes = function(idx, status) {
+    window.handleRes = function (idx, status) {
       const res = JSON.parse(localStorage.getItem('aura_reservations') || '[]');
       res[res.length - 1 - idx].status = status;
       localStorage.setItem('aura_reservations', JSON.stringify(res));
       loadData();
     }
 
-    window.deleteRes = function(idx) {
+    window.deleteRes = function (idx) {
       const res = JSON.parse(localStorage.getItem('aura_reservations') || '[]');
       res.splice(res.length - 1 - idx, 1);
       localStorage.setItem('aura_reservations', JSON.stringify(res));
       loadData();
     }
 
-    window.replyChat = function(idx) {
+    window.replyChat = function (idx) {
       alert("Reply sent! In a real app, this would notify the customer via the chatbot.");
       const chats = JSON.parse(localStorage.getItem('aura_chats') || '[]');
       chats.splice(chats.length - 1 - idx, 1);

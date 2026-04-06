@@ -31,8 +31,33 @@ try {
         id INT AUTO_INCREMENT PRIMARY KEY,
         msg TEXT NOT NULL,
         time VARCHAR(50) NOT NULL,
+        is_admin TINYINT(1) DEFAULT 0,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )");
+
+    try { $pdo->exec("ALTER TABLE chats ADD COLUMN is_admin TINYINT(1) DEFAULT 0"); } catch(PDOException $e) {}
+
+    $pdo->exec("CREATE TABLE IF NOT EXISTS subscribers (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        email VARCHAR(255) NOT NULL UNIQUE,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )");
+
+    $pdo->exec("CREATE TABLE IF NOT EXISTS admins (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(100) NOT NULL,
+        email VARCHAR(255) NOT NULL UNIQUE,
+        password VARCHAR(255) NOT NULL,
+        profile_pic VARCHAR(255) DEFAULT './assets/images/Mequ.jpg',
+        forgot_token VARCHAR(255) DEFAULT NULL,
+        otp_code VARCHAR(6) DEFAULT NULL,
+        otp_expiry DATETIME DEFAULT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )");
+
+    // Self-heal: add otp columns if table already exists without them
+    try { $pdo->exec("ALTER TABLE admins ADD COLUMN otp_code VARCHAR(6) DEFAULT NULL"); } catch(PDOException $e) {}
+    try { $pdo->exec("ALTER TABLE admins ADD COLUMN otp_expiry DATETIME DEFAULT NULL"); } catch(PDOException $e) {}
 
 } catch (PDOException $e) {
     die("Database Connection Error: " . $e->getMessage());

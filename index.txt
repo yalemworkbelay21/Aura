@@ -106,9 +106,7 @@ alt = shape
 #---------- ABOUT ----------#
 
 Our Story
-
 Every Flavor Tells a Story
-
 Our culinary journey is driven by a passion for excellence. We source only the freshest ingredients to create dishes that are as visually stunning as they are delicious. From traditional favorites to modern fusions, every plate at Aura Restaurant is a celebration of taste and tradition.
 
 Book Through Call
@@ -303,11 +301,7 @@ Healthy Food
 
 03/09/2022
 Recipie
-
 View Our Blog
-
-
-
 #---------- FOOTER ----------#
 
 alt = aura home
@@ -350,25 +344,17 @@ Mequannent Gashaw Asinake
 
 WhatsApp: https://wa.me/251918592028
 
-
-
 #---------- BACK TO TOP ----------#
-
 aria-label = back to top
-
 <ion-icon name="chevron-up" aria-hidden="true"></ion-icon>
 
-
-
 #---------- MENU PAGE ----------#
-
 
 Delicious & Amazing
 Our Menu
 
 Special Offer
 Best Special Menu
-
 alt = Greek Salad
 Greek Salad
 Avocados with crab meat, red onion, crab salad red bell pepper...

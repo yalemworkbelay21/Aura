@@ -467,6 +467,20 @@ body.nav-active { overflow: hidden; }
   50% { transform: translateY(30px); }
 }
 
+/* Scroll Reveal */
+.reveal {
+  opacity: 0;
+  transition: all 1s ease-out;
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.reveal-up { transform: translateY(50px); }
+.reveal-left { transform: translateX(-50px); }
+.reveal-right { transform: translateX(50px); }
+.reveal-scale { transform: scale(0.8); }
+
 .has-bg-image {
   background-repeat: no-repeat;
   background-size: cover;

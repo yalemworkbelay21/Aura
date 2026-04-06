@@ -324,18 +324,18 @@
       <section class="section service bg-black-10 text-center" aria-label="service">
         <div class="container">
 
-          <p class="section-subtitle label-2">Flavors For Royalty</p>
+          <p class="section-subtitle label-2 reveal reveal-left">Flavors For Royalty</p>
 
-          <h2 class="headline-1 section-title">We Offer Top Notch</h2>
+          <h2 class="headline-1 section-title reveal reveal-right">We Offer Top Notch</h2>
 
-          <p class="section-text">
+          <p class="section-text reveal reveal-up">
             Experience the finest flavors and a premium atmosphere in the heart of Addis Ababa near Bole Atlas (Rakan
             Building).
             We deliver exceptionally tasty cuisine alongside an exquisite bar selection of fine wines and premium
             whiskeys.
           </p>
 
-          <ul class="grid-list">
+          <ul class="grid-list reveal reveal-up">
 
             <li>
               <div class="service-card">
@@ -429,11 +429,9 @@
 
           <div class="about-content">
 
-            <p class="label-2 section-subtitle" id="about-label">Our Story</p>
-
-            <h2 class="headline-1 section-title">Every Flavor Tells a Story</h2>
-
-            <p class="section-text">
+            <p class="section-subtitle label-2 reveal reveal-left" id="about-label">Our Story</p>
+          <h2 class="headline-1 section-title reveal reveal-left">Every Flavor Tells a Story</h2>
+          <p class="section-text reveal reveal-up">
               Our culinary journey is driven by a passion for excellence. We source only the freshest ingredients to
               create dishes
               that are as visually stunning as they are delicious. From traditional favorites to modern fusions,
@@ -782,7 +780,7 @@
       -->
 
       <section class="reservation" id="reservation">
-        <div class="container">
+        <div class="container reveal reveal-scale">
 
           <div class="form reservation-form bg-black-10">
 
@@ -910,9 +908,9 @@
       -->
 
       <section class="section features text-center" aria-label="features">
-        <div class="container">
+        <div class="container text-center reveal reveal-up">
 
-          <p class="section-subtitle label-2">Why Choose Us</p>
+          <p class="section-subtitle label-2">Aura Restaurant is More Than Food</p>
 
           <h2 class="headline-1 section-title">Our Strength</h2>
 
@@ -995,9 +993,9 @@
       -->
 
       <section class="section event bg-black-10" aria-label="event">
-        <div class="container">
+        <div class="container reveal reveal-up">
 
-          <p class="section-subtitle label-2 text-center">Recent Updates</p>
+          <p class="section-subtitle label-2 text-center">Special Offer</p>
 
           <h2 class="section-title headline-1 text-center">Upcoming Event</h2>
 
@@ -1118,7 +1116,7 @@
           <p class="label-1">
             Subscribe us & Get <span class="span">25% Off.</span>
           </p>
-          <form action="" class="input-wrapper">
+          <form action="" class="input-wrapper" id="subForm">
             <div class="icon-wrapper">
               <ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
 
@@ -1165,7 +1163,7 @@
           </li>
 
           <li>
-            <a href="#" class="label-2 footer-link hover-underline">Instagram</a>
+            <a href="https://www.instagram.com/auraa.ddis/" target="_blank" class="label-2 footer-link hover-underline">Instagram</a>
           </li>
 
           <li>
@@ -1177,7 +1175,7 @@
           </li>
 
           <li>
-            <a href="https://wa.me/251918592028" class="label-2 footer-link hover-underline">WhatsApp</a>
+            <a href="https://wa.me/251974249494" target="_blank" class="label-2 footer-link hover-underline">WhatsApp</a>
           </li>
 
           <li>
@@ -1198,23 +1196,18 @@
             <img src="./assets/images/Mequ.jpg" width="30" height="30"
               style="border-radius: 50%; border: 1px solid var(--gold-color, #E4C590);" alt="Mequannent Gashaw">
             Mequannent Gashaw Asinake
-          </a> | <a href="https://wa.me/251918592028" class="link">WhatsApp</a>
+          </a> | <a href="https://wa.me/251974249494" target="_blank" class="link">WhatsApp</a>
         </p>
 
       </div>
-
     </div>
   </footer>
-
   <!-- 
     - #BACK TO TOP
   -->
-
   <a href="#top" class="back-top-btn active" aria-label="back to top" data-back-top-btn>
     <ion-icon name="chevron-up" aria-hidden="true"></ion-icon>
   </a>
-
-
   <!-- 
     - custom js link
   -->
@@ -1231,7 +1224,8 @@
   <div class="chatbot-container" id="chatbot">
     <div class="chatbot-header">
       <div class="chatbot-info">
-        <img src="./assets/images/Mequ.jpg" width="40" height="40" style="border-radius: 50%; border: 2px solid var(--gold-color, #E4C590);">
+        <img src="./assets/images/Mequ.jpg" width="40" height="40"
+          style="border-radius: 50%; border: 2px solid var(--gold-color, #E4C590);">
         <div>
           <p class="chatbot-name">Aura Assistant</p>
           <p class="chatbot-status">Online</p>
@@ -1249,11 +1243,9 @@
       <button onclick="sendMsg()"><ion-icon name="paper-plane-outline"></ion-icon></button>
     </div>
   </div>
-
   <button class="chatbot-toggle" id="chatToggle" onclick="toggleChat()">
     <ion-icon name="chatbubble-ellipses-outline" id="chatIcon"></ion-icon>
   </button>
-
   <style>
     .chatbot-toggle {
       position: fixed;
@@ -1269,11 +1261,15 @@
       align-items: center;
       font-size: 30px;
       cursor: pointer;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
       z-index: 1000;
       transition: all 0.3s ease;
     }
-    .chatbot-toggle:hover { transform: scale(1.1); }
+
+    .chatbot-toggle:hover {
+      transform: scale(1.1);
+    }
+
     .chatbot-container {
       position: fixed;
       bottom: 100px;
@@ -1287,8 +1283,9 @@
       flex-direction: column;
       overflow: hidden;
       z-index: 1000;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
     }
+
     .chatbot-header {
       padding: 15px;
       background-color: var(--black-10, #161718);
@@ -1297,10 +1294,32 @@
       justify-content: space-between;
       align-items: center;
     }
-    .chatbot-info { display: flex; align-items: center; gap: 10px; }
-    .chatbot-name { color: var(--gold-color, #E4C590); font-weight: bold; font-size: 16px; margin: 0; }
-    .chatbot-status { color: #00ff00; font-size: 12px; margin: 0; }
-    .chatbot-close { color: var(--white, #ffffff); font-size: 24px; cursor: pointer; }
+
+    .chatbot-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chatbot-name {
+      color: var(--gold-color, #E4C590);
+      font-weight: bold;
+      font-size: 16px;
+      margin: 0;
+    }
+
+    .chatbot-status {
+      color: #00ff00;
+      font-size: 12px;
+      margin: 0;
+    }
+
+    .chatbot-close {
+      color: var(--white, #ffffff);
+      font-size: 24px;
+      cursor: pointer;
+    }
+
     .chatbot-box {
       flex-grow: 1;
       padding: 15px;
@@ -1311,6 +1330,7 @@
       min-height: 250px;
       max-height: 350px;
     }
+
     .chat-msg {
       padding: 10px 15px;
       border-radius: 8px;
@@ -1318,14 +1338,26 @@
       font-size: 14px;
       line-height: 1.4;
     }
-    .chat-msg.bot { background-color: var(--gold-color, #E4C590); color: var(--black-10, #161718); align-self: flex-start; }
-    .chat-msg.user { background-color: #333; color: white; align-self: flex-end; }
+
+    .chat-msg.bot {
+      background-color: var(--gold-color, #E4C590);
+      color: var(--black-10, #161718);
+      align-self: flex-start;
+    }
+
+    .chat-msg.user {
+      background-color: #333;
+      color: white;
+      align-self: flex-end;
+    }
+
     .chatbot-input {
       padding: 10px;
       display: flex;
       gap: 5px;
       border-top: 1px solid #333;
     }
+
     .chatbot-input input {
       flex-grow: 1;
       background: transparent;
@@ -1334,19 +1366,55 @@
       outline: none;
       font-size: 14px;
     }
-    .chatbot-input button { color: var(--gold-color, #E4C590); font-size: 20px; cursor: pointer; }
-  </style>
 
+    .chatbot-input button {
+      color: var(--gold-color, #E4C590);
+      font-size: 20px;
+      cursor: pointer;
+    }
+  </style>
   <script>
+    let chatInterval = null;
+
     function toggleChat() {
       const container = document.getElementById('chatbot');
       const icon = document.getElementById('chatIcon');
       if (container.style.display === 'flex') {
         container.style.display = 'none';
         icon.setAttribute('name', 'chatbubble-ellipses-outline');
+        clearInterval(chatInterval);
       } else {
         container.style.display = 'flex';
         icon.setAttribute('name', 'close-outline');
+        loadChats(); // Load immediately
+        chatInterval = setInterval(loadChats, 3000); // Poll every 3 seconds
+      }
+    }
+
+    async function loadChats() {
+      const response = await fetch('api.php?action=get_all');
+      const data = await response.json();
+      
+      const chatbox = document.getElementById('chatbox');
+      // Keep scroll position if we are at the bottom
+      const isScrolledToBottom = chatbox.scrollHeight - chatbox.clientHeight <= chatbox.scrollTop + 1;
+      
+      chatbox.innerHTML = ''; // Clear and rebuild
+      
+      data.chats.forEach(c => {
+         const div = document.createElement('div');
+         if (c.is_admin === 1 || c.is_admin === '1') {
+            div.className = 'chat-msg bot';
+            div.textContent = c.msg;
+         } else {
+            div.className = 'chat-msg user';
+            div.textContent = c.msg;
+         }
+         chatbox.appendChild(div);
+      });
+
+      if (isScrolledToBottom) {
+        chatbox.scrollTop = chatbox.scrollHeight;
       }
     }
 
@@ -1355,38 +1423,26 @@
       const msg = input.value.trim();
       if (!msg) return;
 
-      // Save to PHP Admin
-      await fetch('api.php?action=save_chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ msg: msg, time: new Date().toLocaleString() })
-      });
-
+      // Optimistic upate
       const chatbox = document.getElementById('chatbox');
       const userDiv = document.createElement('div');
       userDiv.className = 'chat-msg user';
       userDiv.textContent = msg;
       chatbox.appendChild(userDiv);
-      input.value = '';
       chatbox.scrollTop = chatbox.scrollHeight;
+      input.value = '';
 
-      setTimeout(() => {
-        const botDiv = document.createElement('div');
-        botDiv.className = 'chat-msg bot';
-        
-        let response = "Thank you for your message! Our team will get back to you soon. For immediate bookings, please use our 'Find A Table' button.";
-        if (msg.toLowerCase().includes('menu')) response = "You can view our seasonal menu on the home page. We have Greek Salad, Lasagne, and more!";
-        if (msg.toLowerCase().includes('location') || msg.toLowerCase().includes('where')) response = "We are located at Aura Restaurant, Rakan Building, Cape Verde St, Addis Ababa, Ethiopia.";
-        if (msg.toLowerCase().includes('phone') || msg.toLowerCase().includes('call')) response = "You can reach us at +251 977 24 9999 or +251 977 34 9999.";
-        
-        botDiv.textContent = response;
-        chatbox.appendChild(botDiv);
-        chatbox.scrollTop = chatbox.scrollHeight;
-      }, 1000);
+      // Save to PHP
+      await fetch('api.php?action=save_chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ msg: msg, is_admin: 0, time: new Date().toLocaleString() })
+      });
+      
+      loadChats();
     }
-
     // Reservation Handling
-    document.getElementById('resForm').addEventListener('submit', async function(e) {
+    document.getElementById('resForm').addEventListener('submit', async function (e) {
       e.preventDefault();
       const formData = new FormData(this);
       const data = {
@@ -1396,14 +1452,13 @@
         date: formData.get('reservation-date'),
         time: formData.get('time') || '08:00am'
       };
-      
       // Save to PHP Admin
       const response = await fetch('api.php?action=save_res', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       });
-      
+
       const result = await response.json();
       if (result.success) {
         alert("Reservation request sent successfully! We will contact you soon.");
@@ -1412,8 +1467,44 @@
         alert("Something went wrong. Please try again.");
       }
     });
+
+    // Subscriber Handling
+    document.getElementById('subForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const email = this.querySelector('input[name="email_address"]').value;
+      if(!email) return;
+
+      const response = await fetch('api.php?action=save_subscriber', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email })
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        alert("Thank you for subscribing! We'll keep you updated.");
+        this.reset();
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    });
   </script>
 
+  <script>
+    /**
+     * SCROLL REVEAL EFFECT
+     */
+    const revealElements = document.querySelectorAll(".reveal");
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+        }
+      });
+    }, { threshold: 0.1 });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+  </script>
 </body>
 
 </html>
