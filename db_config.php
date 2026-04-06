@@ -55,6 +55,24 @@ try {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )");
 
+    // New Tables: Menu Items and Gallery
+    $pdo->exec("CREATE TABLE IF NOT EXISTS menu_items (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        title VARCHAR(255) NOT NULL,
+        category VARCHAR(100) NOT NULL,
+        price DECIMAL(10,2) NOT NULL,
+        description TEXT,
+        image VARCHAR(255) DEFAULT './assets/images/menu-default.png',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )");
+
+    $pdo->exec("CREATE TABLE IF NOT EXISTS gallery (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        image VARCHAR(255) NOT NULL,
+        caption VARCHAR(255),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )");
+
     // Self-heal: add otp columns if table already exists without them
     try { $pdo->exec("ALTER TABLE admins ADD COLUMN otp_code VARCHAR(6) DEFAULT NULL"); } catch(PDOException $e) {}
     try { $pdo->exec("ALTER TABLE admins ADD COLUMN otp_expiry DATETIME DEFAULT NULL"); } catch(PDOException $e) {}

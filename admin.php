@@ -52,57 +52,51 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
     }
 
     .sidebar {
-      width: 100%;
-      height: 80px;
-      background-color: rgba(10, 11, 12, 0.85);
-      backdrop-filter: blur(25px);
-      border-bottom: 1px solid var(--glass-border);
-      padding: 0 40px;
+      width: 260px;
+      height: 100vh;
+      background-color: rgba(10, 11, 12, 0.8);
+      backdrop-filter: blur(20px);
+      border-right: 1px solid var(--glass-border);
+      padding: 30px 15px;
       position: fixed;
-      top: 0; left: 0;
       display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 50px;
-      z-index: 1000;
+      flex-direction: column;
     }
 
     .sidebar-logo {
       font-family: 'Forum', serif;
-      font-size: 24px;
+      font-size: 28px;
       color: var(--gold);
-      margin: 0;
-      letter-spacing: 2px;
+      margin-bottom: 40px;
+      text-align: center;
+      letter-spacing: 3px;
       text-transform: uppercase;
     }
 
     .nav-list {
       list-style: none;
       padding: 0;
-      margin: 0;
-      display: flex;
-      gap: 15px;
+      flex-grow: 1;
     }
 
     .nav-item {
-      padding: 10px 18px;
-      margin: 0;
+      padding: 12px 18px;
+      margin-bottom: 8px;
       border-radius: 12px;
       cursor: pointer;
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 15px;
       color: var(--text-muted);
-      font-size: 13px;
-      font-weight: 600;
+      font-size: 14px;
+      font-weight: 500;
     }
 
     .nav-item:hover {
       background-color: rgba(228, 197, 144, 0.1);
       color: var(--gold);
-      transform: translateY(-2px);
+      transform: translateX(5px);
     }
 
     .nav-item.active {
@@ -112,14 +106,14 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
     }
 
     .nav-item ion-icon {
-      font-size: 18px;
+      font-size: 20px;
     }
 
     .main-content {
-      margin: 120px auto 50px;
-      padding: 0 20px;
-      max-width: 1200px;
-      width: 95%;
+      margin-left: 260px;
+      flex-grow: 1;
+      padding: 30px 50px;
+      max-width: 1400px;
     }
 
     .header-bar {
@@ -289,67 +283,68 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
   </div>
 
   <aside class="sidebar">
-    <div class="sidebar-logo">AURA DASHBOARD</div>
+    <div class="sidebar-logo">AURA PHP</div>
     <ul class="nav-list">
       <li class="nav-item active" onclick="showSection('reservations')">
         <ion-icon name="calendar-outline"></ion-icon> Reservations
       </li>
       <li class="nav-item" onclick="showSection('chats')">
-        <ion-icon name="chatbubbles-outline"></ion-icon> Chats
+        <ion-icon name="chatbubbles-outline"></ion-icon> Chat Messages
       </li>
       <li class="nav-item" onclick="showSection('subscribers')">
         <ion-icon name="people-outline"></ion-icon> Subscribers
       </li>
-      <li class="nav-item" onclick="showSection('profile')">
-        <ion-icon name="person-circle-outline"></ion-icon> Profile
+      <li class="nav-item" onclick="showSection('menu-manager')">
+        <ion-icon name="restaurant-outline"></ion-icon> Menu Manager
       </li>
-      <li class="nav-item">
-        <a href="index.html" style="color: inherit; text-decoration: none; display: flex; align-items: center; gap: 8px;">
-          <ion-icon name="home-outline"></ion-icon> Site
+      <li class="nav-item" onclick="showSection('gallery-manager')">
+        <ion-icon name="images-outline"></ion-icon> Gallery Manager
+      </li>
+      <li class="nav-item" onclick="showSection('profile')">
+        <ion-icon name="person-circle-outline"></ion-icon> My Profile
+      </li>
+      <li class="nav-item" style="margin-top: auto;">
+        <a href="logout.php"
+          style="color: #e74c3c; text-decoration: none; display: flex; align-items: center; gap: 15px;">
+          <ion-icon name="log-out-outline"></ion-icon> Logout
         </a>
       </li>
-      <li class="nav-item" style="margin-left: 10px;">
-        <a href="logout.php" style="color: #e74c3c; text-decoration: none; display: flex; align-items: center; gap: 8px;">
-          <ion-icon name="log-out-outline"></ion-icon> Exit
+      <li class="nav-item">
+        <a href="index.html"
+          style="color: inherit; text-decoration: none; display: flex; align-items: center; gap: 15px;">
+          <ion-icon name="home-outline"></ion-icon> View Site
         </a>
       </li>
     </ul>
-
-    <div style="display: flex; align-items: center; gap: 15px; border-left: 1px solid var(--glass-border); padding-left: 20px; margin-left: auto;">
-      <div style="text-align: right;">
-        <p id="mgrName" style="margin: 0; font-size: 13px; font-weight: 700; color: var(--gold);"><?php echo $username; ?></p>
-        <p style="margin: 0; font-size: 11px; color: var(--text-muted);">Manager</p>
-      </div>
-      <img id="topProfilePic" src="<?php echo $profilePic; ?>" width="42" height="42"
-        style="border-radius: 50%; border: 2px solid var(--gold); object-fit: cover;">
-    </div>
   </aside>
 
   <main class="main-content">
-    <div class="header-bar">
-      <h1 style="font-family: 'Forum', serif; font-size: 42px; margin: 0; letter-spacing: 1px;" id="pageTitle">Reservations</h1>
-      <div style="display: flex; gap: 10px; align-items: center;">
-        <span class="status-badge" style="background: rgba(0, 255, 0, 0.1); color: #00ff00; border: 1px solid rgba(0, 255, 0, 0.2);"> System Live </span>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
+      <h1 style="font-family: 'Forum', serif; font-size: 36px; margin: 0;" id="pageTitle">Reservations</h1>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span id="mgrName"><?php echo $username; ?></span>
+        <img id="topProfilePic" src="<?php echo $profilePic; ?>" width="40" height="40"
+          style="border-radius: 50%; border: 2px solid var(--gold);">
       </div>
     </div>
 
     <!-- Stats -->
     <div class="stats-grid">
       <div class="stat-card">
-        <p class="stat-label">Real-time Bookings</p>
+        <p class="stat-label">Bookings</p>
         <p class="stat-value" id="totalRes">0</p>
       </div>
       <div class="stat-card">
-        <p class="stat-label">System Messages</p>
+        <p class="stat-label">Messages</p>
         <p class="stat-value" id="pendingChats">0</p>
       </div>
       <div class="stat-card">
-        <p class="stat-label">Total Subscribers</p>
-        <p class="stat-value" id="totalSubs">0</p>
+        <p class="stat-label">Menu Items</p>
+        <p class="stat-value" id="totalMenuItems">0</p>
       </div>
       <div class="stat-card">
-        <p class="stat-label">PHP Node Status</p>
-        <p class="stat-value" style="color: #00ff00;">Online</p>
+        <p class="stat-label">Gallery</p>
+        <p class="stat-value" id="totalGalleryItems">0</p>
       </div>
     </div>
 
@@ -402,6 +397,36 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
           <!-- Data populated by JS -->
         </tbody>
       </table>
+    </div>
+
+    <!-- Section: Menu Manager -->
+    <div id="menu-manager" class="data-table-container" style="display: none;">
+      <div style="padding: 20px 25px; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center;">
+        <h2 style="font-family: 'Forum', serif; color: var(--gold); margin: 0;">Menu Manager</h2>
+        <button class="action-btn" onclick="openAddMenu()" style="width: 140px; border-radius: 8px; font-size: 13px;">+ Add Dish</button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Dish</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="menuTable"></tbody>
+      </table>
+    </div>
+
+    <!-- Section: Gallery Manager -->
+    <div id="gallery-manager" class="data-table-container" style="display: none;">
+      <div style="padding: 20px 25px; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center;">
+        <h2 style="font-family: 'Forum', serif; color: var(--gold); margin: 0;">Gallery Manager</h2>
+        <button class="action-btn" onclick="openAddGallery()" style="width: 150px; border-radius: 8px; font-size: 13px;">+ Add Image</button>
+      </div>
+      <div id="galleryGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; padding: 25px;">
+        <!-- Data populated by JS -->
+      </div>
     </div>
 
     <!-- Section: Profile -->
@@ -460,6 +485,8 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
       document.getElementById('reservations').style.display = 'none';
       document.getElementById('chats').style.display = 'none';
       document.getElementById('subscribers').style.display = 'none';
+      document.getElementById('menu-manager').style.display = 'none';
+      document.getElementById('gallery-manager').style.display = 'none';
       document.getElementById('profile').style.display = 'none';
       document.getElementById(id).style.display = 'block';
       document.getElementById('pageTitle').innerText = id.charAt(0).toUpperCase() + id.slice(1);
@@ -476,7 +503,8 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
 
       document.getElementById('totalRes').innerText = data.reservations.length;
       document.getElementById('pendingChats').innerText = data.chats.length;
-      document.getElementById('totalSubs').innerText = data.subscribers.length;
+      document.getElementById('totalMenuItems').innerText = data.menu.length;
+      document.getElementById('totalGalleryItems').innerText = data.gallery.length;
 
       const resTable = document.getElementById('resTable');
       resTable.innerHTML = '';
@@ -554,6 +582,125 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
         `;
         subTable.appendChild(tr);
       });
+
+      const menuTable = document.getElementById('menuTable');
+      menuTable.innerHTML = '';
+      data.menu.forEach(m => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><div style="display:flex; align-items:center; gap:10px;"><img src="${m.image}" width="40" height="40" style="border-radius:8px"> ${m.title}</div></td>
+          <td>${m.category}</td>
+          <td>$${m.price}</td>
+          <td>
+            <button class="action-btn btn-delete" onclick="deleteMenu(${m.id})"><ion-icon name="trash-outline"></ion-icon></button>
+          </td>
+        `;
+        menuTable.appendChild(tr);
+      });
+
+      const galleryGrid = document.getElementById('galleryGrid');
+      galleryGrid.innerHTML = '';
+      data.gallery.forEach(g => {
+        const div = document.createElement('div');
+        div.style.position = 'relative';
+        div.innerHTML = `
+          <img src="${g.image}" style="width:100%; height:150px; object-fit:cover; border-radius:12px; border: 1px solid var(--glass-border)">
+          <button class="action-btn btn-delete" onclick="deleteGallery(${g.id})" style="position:absolute; top:10px; right:10px; width:30px; height:30px">
+            <ion-icon name="trash-outline"></ion-icon>
+          </button>
+        `;
+        galleryGrid.appendChild(div);
+      });
+    }
+
+    window.openAddMenu = function() {
+      const body = document.getElementById('modalBody');
+      body.innerHTML = `
+        <form onsubmit="saveMenu(event)">
+          <div style="margin-bottom:15px"><input type="text" id="mTitle" placeholder="Dish Title" class="input-reply" style="width:100%" required></div>
+          <div style="margin-bottom:15px">
+            <select id="mCat" class="input-reply" style="width:100%">
+              <option value="Breakfast">Breakfast</option>
+              <option value="Appetizers">Appetizers</option>
+              <option value="Main Course">Main Course</option>
+              <option value="Drinks">Drinks</option>
+              <option value="Desserts">Desserts</option>
+            </select>
+          </div>
+          <div style="margin-bottom:15px"><input type="number" step="0.01" id="mPrice" placeholder="Price" class="input-reply" style="width:100%" required></div>
+          <div style="margin-bottom:15px"><textarea id="mDesc" placeholder="Description" class="input-reply" style="width:100%"></textarea></div>
+          <div style="margin-bottom:15px"><input type="text" id="mImg" placeholder="Image URL (or leave default)" class="input-reply" style="width:100%"></div>
+          <button type="submit" class="btn-action" style="width:100%">Add to Menu</button>
+        </form>
+      `;
+      document.getElementById('viewModal').style.display = 'flex';
+      document.querySelector('.modal-title').innerText = "Add New Dish";
+    }
+
+    window.saveMenu = async function(e) {
+      e.preventDefault();
+      const data = {
+        title: document.getElementById('mTitle').value,
+        category: document.getElementById('mCat').value,
+        price: document.getElementById('mPrice').value,
+        description: document.getElementById('mDesc').value,
+        image: document.getElementById('mImg').value
+      };
+      await fetch('api.php?action=save_menu', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+      });
+      closeModal();
+      loadData();
+    }
+
+    window.deleteMenu = async function(id) {
+       if(!confirm("Delete this dish?")) return;
+       await fetch('api.php?action=delete_menu', {
+         method: 'POST',
+         headers: {'Content-Type': 'application/json'},
+         body: JSON.stringify({id})
+       });
+       loadData();
+    }
+
+    window.openAddGallery = function() {
+      const body = document.getElementById('modalBody');
+      body.innerHTML = `
+        <form onsubmit="saveGallery(event)">
+          <div style="margin-bottom:15px"><input type="text" id="gImg" placeholder="Image URL" class="input-reply" style="width:100%" required></div>
+          <div style="margin-bottom:15px"><input type="text" id="gCap" placeholder="Caption (optional)" class="input-reply" style="width:100%"></div>
+          <button type="submit" class="btn-action" style="width:100%">Add to Gallery</button>
+        </form>
+      `;
+      document.getElementById('viewModal').style.display = 'flex';
+      document.querySelector('.modal-title').innerText = "Add Gallery Image";
+    }
+
+    window.saveGallery = async function(e) {
+      e.preventDefault();
+      const data = {
+        image: document.getElementById('gImg').value,
+        caption: document.getElementById('gCap').value
+      };
+      await fetch('api.php?action=save_gallery', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+      });
+      closeModal();
+      loadData();
+    }
+
+    window.deleteGallery = async function(id) {
+       if(!confirm("Delete this image?")) return;
+       await fetch('api.php?action=delete_gallery', {
+         method: 'POST',
+         headers: {'Content-Type': 'application/json'},
+         body: JSON.stringify({id})
+       });
+       loadData();
     }
 
     window.deleteSub = async function (id) {

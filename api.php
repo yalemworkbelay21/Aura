@@ -57,6 +57,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute([$input['email']]);
         echo json_encode(['success' => true]);
     }
+    if ($action === 'save_menu') {
+        $stmt = $pdo->prepare("INSERT INTO menu_items (title, category, price, description, image) VALUES (?, ?, ?, ?, ?)");
+        $stmt->execute([
+            $input['title'],
+            $input['category'],
+            $input['price'],
+            $input['description'],
+            $input['image'] ?: './assets/images/menu-default.png'
+        ]);
+        echo json_encode(['success' => true]);
+    }
+    if ($action === 'delete_menu') {
+        $stmt = $pdo->prepare("DELETE FROM menu_items WHERE id = ?");
+        $stmt->execute([$input['id']]);
+        echo json_encode(['success' => true]);
+    }
+    if ($action === 'save_gallery') {
+        $stmt = $pdo->prepare("INSERT INTO gallery (image, caption) VALUES (?, ?)");
+        $stmt->execute([ $input['image'], $input['caption'] ]);
+        echo json_encode(['success' => true]);
+    }
+    if ($action === 'delete_gallery') {
+        $stmt = $pdo->prepare("DELETE FROM gallery WHERE id = ?");
+        $stmt->execute([$input['id']]);
+        echo json_encode(['success' => true]);
+    }
     if ($action === 'delete_subscriber') {
         $stmt = $pdo->prepare("DELETE FROM subscribers WHERE id = ?");
         $stmt->execute([$input['id']]);
@@ -68,11 +94,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $resStmt = $pdo->query("SELECT * FROM reservations ORDER BY created_at DESC");
         $chatStmt = $pdo->query("SELECT * FROM chats ORDER BY created_at ASC");
         $subStmt = $pdo->query("SELECT * FROM subscribers ORDER BY created_at DESC");
+        $menuStmt = $pdo->query("SELECT * FROM menu_items ORDER BY category ASC, title ASC");
+        $galStmt = $pdo->query("SELECT * FROM gallery ORDER BY created_at DESC");
 
         echo json_encode([
             'reservations' => $resStmt->fetchAll(),
             'chats' => $chatStmt->fetchAll(),
-            'subscribers' => $subStmt->fetchAll()
+            'subscribers' => $subStmt->fetchAll(),
+            'menu' => $menuStmt->fetchAll(),
+            'gallery' => $galStmt->fetchAll()
         ]);
     }
 }
