@@ -62,6 +62,7 @@ async function initDynamicContent() {
     // Dynamic Menu Rendering
     const menuList = document.getElementById('dyn_menu_list');
     if (menuList && data.menu && data.menu.length > 0) {
+      const currency = data.settings && data.settings.site_currency ? data.settings.site_currency : '$';
       menuList.innerHTML = data.menu.map(m => `
         <li>
           <div class="menu-card hover:card">
@@ -71,7 +72,7 @@ async function initDynamicContent() {
             <div>
               <div class="title-wrapper">
                 <h3 class="title-3"><a href="#" class="card-title">${m.title}</a></h3>
-                <span class="span title-2">$${m.price}</span>
+                <span class="span title-2">${currency}${m.price}</span>
               </div>
               <p class="card-text label-1">${m.description || ''}</p>
             </div>

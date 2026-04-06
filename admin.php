@@ -553,6 +553,18 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
             <label style="display: block; color: var(--text-muted); margin-bottom: 8px;">Full Address</label>
             <input type="text" id="set_site_address" class="input-reply" style="width: 100%;">
           </div>
+
+          <h3 style="color: var(--gold); margin-top: 30px; margin-bottom: 15px; font-family: 'Forum', serif;">Localization</h3>
+          <div style="margin-bottom: 20px;">
+            <label style="display: block; color: var(--text-muted); margin-bottom: 8px;">Site Currency</label>
+            <select id="set_site_currency" class="input-reply" style="width: 100%;">
+              <option value="$">USD ($)</option>
+              <option value="€">EUR (€)</option>
+              <option value="£">GBP (£)</option>
+              <option value="Br">ETB (Br)</option>
+              <option value="د.إ">AED (د.إ)</option>
+            </select>
+          </div>
           
           <h3 style="color: var(--gold); margin-top: 30px; margin-bottom: 15px; font-family: 'Forum', serif;">Homepage Hero Content</h3>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
@@ -769,6 +781,7 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
 
       const menuTable = document.getElementById('menuTable');
       menuTable.innerHTML = '';
+      const currency = data.settings && data.settings.site_currency ? data.settings.site_currency : '$';
       data.menu.forEach(m => {
         const tr = document.createElement('tr');
         const mJson = JSON.stringify(m).replace(/'/g, "&#39;");
@@ -783,15 +796,16 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
             </div>
           </td>
           <td><span style="font-size:13px; color:var(--gold); opacity:0.8">${m.category}</span></td>
-          <td><span style="font-weight:700; color:var(--gold)">$${m.price}</span></td>
+          <td><span style="font-weight:700; color:var(--gold)">${currency}${m.price}</span></td>
           <td>
             <div style="display:flex; gap:5px;">
-               <button class="action-btn btn-view" onclick='viewMenu(${mJson})' title="View Details"><ion-icon name="eye-outline"></ion-icon></button>
+               <button class="action-btn btn-view" onclick='viewMenu(${mJson}, "${currency}")' title="View Details"><ion-icon name="eye-outline"></ion-icon></button>
                <button class="action-btn btn-confirm" onclick='editMenu(${mJson})' title="Edit Dish"><ion-icon name="create-outline"></ion-icon></button>
                <button class="action-btn btn-delete" onclick="deleteMenu(${m.id})" title="Delete Dish"><ion-icon name="trash-outline"></ion-icon></button>
             </div>
           </td>
         `;
+
         menuTable.appendChild(tr);
       });
 
@@ -835,6 +849,7 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
         site_email: document.getElementById('set_site_email').value,
         site_hours: document.getElementById('set_site_hours').value,
         site_address: document.getElementById('set_site_address').value,
+        site_currency: document.getElementById('set_site_currency').value,
         hero_subtitle: document.getElementById('set_hero_subtitle').value,
         hero_title: document.getElementById('set_hero_title').value,
         hero2_subtitle: document.getElementById('set_hero2_subtitle').value,
@@ -868,7 +883,7 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
       renderMenuForm(m);
     }
 
-    window.viewMenu = function(m) {
+    window.viewMenu = function(m, currency = '$') {
        const body = document.getElementById('modalBody');
        body.innerHTML = `
          <div style="text-align:center; margin-bottom:20px;">
@@ -876,7 +891,7 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
          </div>
          <div class="modal-item"><span class="modal-label">Title:</span> ${m.title}</div>
          <div class="modal-item"><span class="modal-label">Category:</span> ${m.category}</div>
-         <div class="modal-item"><span class="modal-label">Price:</span> $${m.price}</div>
+         <div class="modal-item"><span class="modal-label">Price:</span> ${currency}${m.price}</div>
          <div class="modal-item"><span class="modal-label">Description:</span> ${m.description || 'N/A'}</div>
        `;
        document.getElementById('viewModal').style.display = 'flex';
