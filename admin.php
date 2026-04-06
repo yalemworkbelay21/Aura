@@ -375,7 +375,7 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
   </div>
 
   <aside class="sidebar">
-    <div class="sidebar-logo">AURA PHP</div>
+    <div class="sidebar-logo">AURA ADMIN</div>
     <ul class="nav-list">
       <li class="nav-item active" onclick="showSection('reservations')">
         <ion-icon name="calendar-outline"></ion-icon> Reservations
