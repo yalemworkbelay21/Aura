@@ -58,14 +58,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode(['success' => true]);
     }
     if ($action === 'save_menu') {
-        $stmt = $pdo->prepare("INSERT INTO menu_items (title, category, price, description, image) VALUES (?, ?, ?, ?, ?)");
-        $stmt->execute([
-            $input['title'],
-            $input['category'],
-            $input['price'],
-            $input['description'],
-            $input['image'] ?: './assets/images/menu-default.png'
-        ]);
+        if (isset($input['id'])) {
+            $stmt = $pdo->prepare("UPDATE menu_items SET title = ?, category = ?, price = ?, description = ?, image = ? WHERE id = ?");
+            $stmt->execute([
+                $input['title'],
+                $input['category'],
+                $input['price'],
+                $input['description'],
+                $input['image'],
+                $input['id']
+            ]);
+        } else {
+            $stmt = $pdo->prepare("INSERT INTO menu_items (title, category, price, description, image) VALUES (?, ?, ?, ?, ?)");
+            $stmt->execute([
+                $input['title'],
+                $input['category'],
+                $input['price'],
+                $input['description'],
+                $input['image'] ?: './assets/images/menu-default.png'
+            ]);
+        }
         echo json_encode(['success' => true]);
     }
     if ($action === 'delete_menu') {
@@ -74,8 +86,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode(['success' => true]);
     }
     if ($action === 'save_gallery') {
-        $stmt = $pdo->prepare("INSERT INTO gallery (image, caption) VALUES (?, ?)");
-        $stmt->execute([ $input['image'], $input['caption'] ]);
+        if (isset($input['id'])) {
+            $stmt = $pdo->prepare("UPDATE gallery SET image = ?, caption = ? WHERE id = ?");
+            $stmt->execute([ $input['image'], $input['caption'], $input['id'] ]);
+        } else {
+            $stmt = $pdo->prepare("INSERT INTO gallery (image, caption) VALUES (?, ?)");
+            $stmt->execute([ $input['image'], $input['caption'] ]);
+        }
         echo json_encode(['success' => true]);
     }
     if ($action === 'delete_gallery') {

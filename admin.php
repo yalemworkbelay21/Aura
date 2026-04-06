@@ -660,12 +660,17 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
       menuTable.innerHTML = '';
       data.menu.forEach(m => {
         const tr = document.createElement('tr');
+        const mJson = JSON.stringify(m).replace(/'/g, "&#39;");
         tr.innerHTML = `
           <td><div style="display:flex; align-items:center; gap:10px;"><img src="${m.image}" width="40" height="40" style="border-radius:8px"> ${m.title}</div></td>
           <td>${m.category}</td>
           <td>$${m.price}</td>
           <td>
-            <button class="action-btn btn-delete" onclick="deleteMenu(${m.id})"><ion-icon name="trash-outline"></ion-icon></button>
+            <div style="display:flex; gap:5px;">
+               <button class="action-btn btn-view" onclick='viewMenu(${mJson})' title="View Details"><ion-icon name="eye-outline"></ion-icon></button>
+               <button class="action-btn btn-confirm" onclick='editMenu(${mJson})' title="Edit Dish"><ion-icon name="create-outline"></ion-icon></button>
+               <button class="action-btn btn-delete" onclick="deleteMenu(${m.id})" title="Delete Dish"><ion-icon name="trash-outline"></ion-icon></button>
+            </div>
           </td>
         `;
         menuTable.appendChild(tr);
@@ -675,12 +680,18 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
       galleryGrid.innerHTML = '';
       data.gallery.forEach(g => {
         const div = document.createElement('div');
+        const gJson = JSON.stringify(g).replace(/'/g, "&#39;");
         div.style.position = 'relative';
         div.innerHTML = `
           <img src="${g.image}" style="width:100%; height:150px; object-fit:cover; border-radius:12px; border: 1px solid var(--glass-border)">
-          <button class="action-btn btn-delete" onclick="deleteGallery(${g.id})" style="position:absolute; top:10px; right:10px; width:30px; height:30px">
-            <ion-icon name="trash-outline"></ion-icon>
-          </button>
+          <div style="position:absolute; top:10px; right:10px; display:flex; gap:5px;">
+            <button class="action-btn btn-confirm" onclick='editGallery(${gJson})' style="width:30px; height:30px" title="Edit Caption">
+              <ion-icon name="create-outline"></ion-icon>
+            </button>
+            <button class="action-btn btn-delete" onclick="deleteGallery(${g.id})" style="width:30px; height:30px" title="Delete Image">
+              <ion-icon name="trash-outline"></ion-icon>
+            </button>
+          </div>
         `;
         galleryGrid.appendChild(div);
       });
@@ -717,31 +728,56 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
     }
 
     window.openAddMenu = function() {
+      renderMenuForm();
+    }
+
+    window.editMenu = function(m) {
+      renderMenuForm(m);
+    }
+
+    window.viewMenu = function(m) {
+       const body = document.getElementById('modalBody');
+       body.innerHTML = `
+         <div style="text-align:center; margin-bottom:20px;">
+           <img src="${m.image}" style="width:150px; height:150px; border-radius:15px; border:2px solid var(--gold)">
+         </div>
+         <div class="modal-item"><span class="modal-label">Title:</span> ${m.title}</div>
+         <div class="modal-item"><span class="modal-label">Category:</span> ${m.category}</div>
+         <div class="modal-item"><span class="modal-label">Price:</span> $${m.price}</div>
+         <div class="modal-item"><span class="modal-label">Description:</span> ${m.description || 'N/A'}</div>
+       `;
+       document.getElementById('viewModal').style.display = 'flex';
+       document.querySelector('.modal-title').innerText = "Dish Details";
+    }
+
+    function renderMenuForm(m = null) {
       const body = document.getElementById('modalBody');
       body.innerHTML = `
         <form onsubmit="saveMenu(event)">
-          <div style="margin-bottom:15px"><input type="text" id="mTitle" placeholder="Dish Title" class="input-reply" style="width:100%" required></div>
+          <input type="hidden" id="mId" value="${m ? m.id : ''}">
+          <div style="margin-bottom:15px"><input type="text" id="mTitle" placeholder="Dish Title" value="${m ? m.title : ''}" class="input-reply" style="width:100%" required></div>
           <div style="margin-bottom:15px">
             <select id="mCat" class="input-reply" style="width:100%">
-              <option value="Breakfast">Breakfast</option>
-              <option value="Appetizers">Appetizers</option>
-              <option value="Main Course">Main Course</option>
-              <option value="Drinks">Drinks</option>
-              <option value="Desserts">Desserts</option>
+              <option value="Breakfast" ${m && m.category === 'Breakfast' ? 'selected' : ''}>Breakfast</option>
+              <option value="Appetizers" ${m && m.category === 'Appetizers' ? 'selected' : ''}>Appetizers</option>
+              <option value="Main Course" ${m && m.category === 'Main Course' ? 'selected' : ''}>Main Course</option>
+              <option value="Drinks" ${m && m.category === 'Drinks' ? 'selected' : ''}>Drinks</option>
+              <option value="Desserts" ${m && m.category === 'Desserts' ? 'selected' : ''}>Desserts</option>
             </select>
           </div>
-          <div style="margin-bottom:15px"><input type="number" step="0.01" id="mPrice" placeholder="Price" class="input-reply" style="width:100%" required></div>
-          <div style="margin-bottom:15px"><textarea id="mDesc" placeholder="Description" class="input-reply" style="width:100%"></textarea></div>
-          <div style="margin-bottom:15px"><input type="text" id="mImg" placeholder="Image URL (or leave default)" class="input-reply" style="width:100%"></div>
-          <button type="submit" class="btn-action" style="width:100%">Add to Menu</button>
+          <div style="margin-bottom:15px"><input type="number" step="0.01" id="mPrice" placeholder="Price" value="${m ? m.price : ''}" class="input-reply" style="width:100%" required></div>
+          <div style="margin-bottom:15px"><textarea id="mDesc" placeholder="Description" class="input-reply" style="width:100%">${m ? m.description : ''}</textarea></div>
+          <div style="margin-bottom:15px"><input type="text" id="mImg" placeholder="Image URL" value="${m ? m.image : ''}" class="input-reply" style="width:100%"></div>
+          <button type="submit" class="btn-action" style="width:100%">${m ? 'Update Dish' : 'Add to Menu'}</button>
         </form>
       `;
       document.getElementById('viewModal').style.display = 'flex';
-      document.querySelector('.modal-title').innerText = "Add New Dish";
+      document.querySelector('.modal-title').innerText = m ? "Edit Dish" : "Add New Dish";
     }
 
     window.saveMenu = async function(e) {
       e.preventDefault();
+      const id = document.getElementById('mId').value;
       const data = {
         title: document.getElementById('mTitle').value,
         category: document.getElementById('mCat').value,
@@ -749,6 +785,8 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
         description: document.getElementById('mDesc').value,
         image: document.getElementById('mImg').value
       };
+      if (id) data.id = id;
+
       await fetch('api.php?action=save_menu', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -769,24 +807,36 @@ $profilePic = $_SESSION['profile_pic'] ?: './assets/images/Mequ.jpg';
     }
 
     window.openAddGallery = function() {
+      renderGalleryForm();
+    }
+
+    window.editGallery = function(g) {
+      renderGalleryForm(g);
+    }
+
+    function renderGalleryForm(g = null) {
       const body = document.getElementById('modalBody');
       body.innerHTML = `
         <form onsubmit="saveGallery(event)">
-          <div style="margin-bottom:15px"><input type="text" id="gImg" placeholder="Image URL" class="input-reply" style="width:100%" required></div>
-          <div style="margin-bottom:15px"><input type="text" id="gCap" placeholder="Caption (optional)" class="input-reply" style="width:100%"></div>
-          <button type="submit" class="btn-action" style="width:100%">Add to Gallery</button>
+          <input type="hidden" id="gId" value="${g ? g.id : ''}">
+          <div style="margin-bottom:15px"><input type="text" id="gImg" placeholder="Image URL" value="${g ? g.image : ''}" class="input-reply" style="width:100%" required></div>
+          <div style="margin-bottom:15px"><input type="text" id="gCap" placeholder="Caption" value="${g ? g.caption : ''}" class="input-reply" style="width:100%"></div>
+          <button type="submit" class="btn-action" style="width:100%">${g ? 'Update Image' : 'Add to Gallery'}</button>
         </form>
       `;
       document.getElementById('viewModal').style.display = 'flex';
-      document.querySelector('.modal-title').innerText = "Add Gallery Image";
+      document.querySelector('.modal-title').innerText = g ? "Edit Gallery Image" : "Add Gallery Image";
     }
 
     window.saveGallery = async function(e) {
       e.preventDefault();
+      const id = document.getElementById('gId').value;
       const data = {
         image: document.getElementById('gImg').value,
         caption: document.getElementById('gCap').value
       };
+      if (id) data.id = id;
+
       await fetch('api.php?action=save_gallery', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
